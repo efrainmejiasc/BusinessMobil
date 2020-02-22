@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessMobil.App.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace BusinessMobil.App
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MenuViewModel(this.Navigation);
         }
     }
 }
