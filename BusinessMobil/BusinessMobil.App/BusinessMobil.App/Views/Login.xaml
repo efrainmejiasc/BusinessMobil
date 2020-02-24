@@ -4,7 +4,9 @@
              x:Class="BusinessMobil.App.Views.Login">
     <ContentPage.Content>
         <StackLayout>
-            
+            <Grid>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
