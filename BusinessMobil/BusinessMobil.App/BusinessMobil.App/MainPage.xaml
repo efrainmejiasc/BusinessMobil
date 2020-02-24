@@ -23,7 +23,7 @@
             <Button 
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="Escanear Codigo" 
+                Text="Escanear Codigo QR" 
                 Command="{Binding ScannerCommand}" />
         </Grid>
     </ContentPage.Content>
