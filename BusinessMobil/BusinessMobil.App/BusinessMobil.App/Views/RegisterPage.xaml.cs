@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessMobil.App.ViewModel;
+
 using Xamarin.Forms;
 
 namespace BusinessMobil.App.Views
 {
-    public partial class Login : ContentPage
+    public partial class RegisterPage : ContentPage
     {
-        public Login()
+        public RegisterPage()
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel(this.Navigation);
         }
     }
 }

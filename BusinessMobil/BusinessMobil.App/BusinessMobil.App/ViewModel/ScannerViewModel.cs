@@ -20,7 +20,7 @@ namespace BusinessMobil.App.ViewModel
             barcodeText = "N/A";
         }
 
-        public INavigation Navigation { get; set; }
+        
 
         public ICommand ScannerCommand { get; set; }
 
