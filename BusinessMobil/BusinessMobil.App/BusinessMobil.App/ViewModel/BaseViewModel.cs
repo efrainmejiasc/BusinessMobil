@@ -9,9 +9,12 @@ namespace BusinessMobil.App.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public INavigation Navigation { get; set; }
+        public INavigation Navigation { get => Application.Current.MainPage.Navigation; } 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public BaseViewModel()
+        {
+            
+        }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -15,7 +15,6 @@ namespace BusinessMobil.App.ViewModel
     {
         public ScannerViewModel(INavigation navigation)
         {
-            Navigation = navigation;
             ScannerCommand = new Command(async () => await ScanCode());
             barcodeText = "N/A";
         }

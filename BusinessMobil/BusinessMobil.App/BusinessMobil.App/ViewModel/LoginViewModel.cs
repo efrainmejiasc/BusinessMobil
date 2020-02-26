@@ -7,10 +7,10 @@ namespace BusinessMobil.App.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel(INavigation navigation)
+        public LoginViewModel()
         {
-            Navigation = navigation;
             EntrarCommand = new Command( async () => await Entrar());
+            //Navigation = Application.Current.MainPage.Navigation;
         }
         public string EMail { get; set; }
         public string Password { get; set; }

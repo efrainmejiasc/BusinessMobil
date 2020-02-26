@@ -3,20 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
              x:Class="BusinessMobil.App.Views.Login">
-    
+
+    <ContentPage.BindingContext>
+        <viewModel:LoginViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="220"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Entry Grid.Row="1" Text="{Binding EMail}"/>
-                <Entry Grid.Row="2" Text="{Binding Password}"/>
-                <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}"/>
+                <Image Source="EMHU0519.JPG" Grid.Row="0"/>
+                <StackLayout Grid.Row="1">
+                    <Label Text="Usuario o Email"/>
+                <Entry Text="{Binding EMail}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label Text="Contraseña"/>
+                <Entry Text="{Binding Password}"/>
+                </StackLayout>
+                <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}" Margin="0"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

@@ -10,7 +10,6 @@ namespace BusinessMobil.App.Views
         public Login()
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel(this.Navigation);
         }
     }
 }
