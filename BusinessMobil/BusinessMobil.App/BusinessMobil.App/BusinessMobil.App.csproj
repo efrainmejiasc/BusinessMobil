@@ -23,7 +23,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Img\" />
     <Folder Include="Model\" />
     <Folder Include="Service\" />
   </ItemGroup>
