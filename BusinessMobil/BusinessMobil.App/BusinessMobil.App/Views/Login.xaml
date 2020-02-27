@@ -16,8 +16,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Image Source="EMHU0519.JPG" Grid.Row="0"/>
+                <Image Source="logo.JPG" Grid.Row="0"/>
                 <StackLayout Grid.Row="1">
                     <Label Text="Usuario o Email"/>
                 <Entry Text="{Binding EMail}"/>
@@ -27,6 +28,7 @@
                 <Entry Text="{Binding Password}"/>
                 </StackLayout>
                 <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}" Margin="0"/>
+                <Button Grid.Row="4" Text="Registrarse" Command="{Binding RegistrarseCommand}" Margin="0"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

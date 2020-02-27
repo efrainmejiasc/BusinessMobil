@@ -1,15 +1,14 @@
 ﻿using System;
 namespace BusinessMobil.App.Model
 {
-    public class RegisterModel
+    public class LoginModel
     {
-        public RegisterModel()
+        public LoginModel()
         {
-
         }
+
         public string Email { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
-        public string Company { get; set; }
     }
 }
