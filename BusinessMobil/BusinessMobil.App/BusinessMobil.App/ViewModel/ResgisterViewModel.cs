@@ -62,7 +62,7 @@ namespace BusinessMobil.App.ViewModel
             }
 
             var register = new RegisterModel { Email = Email, User = User, Password = Password };
-            var result = await api.PostRespondeAsync<RegisterModel>("/UserApi/CreateUser",register);
+            var result = await api.PostRespondeAsync<RegisterModel>("UserApi/CreateUser",register);
             if(!result.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert("Error!", result.Message,"Ok");

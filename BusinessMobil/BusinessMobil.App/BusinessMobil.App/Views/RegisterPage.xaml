@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BusinessMobil.App.Views.RegisterPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             x:Class="BusinessMobil.App.Views.RegisterPage">
+    <ContentPage.BindingContext>
+        <viewModel:ResgisterViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="10">
@@ -14,17 +20,17 @@
                 <Image Source="logo.JPG" Grid.Row="0"/>
                 <StackLayout Grid.Row="1" Margin="0,10,0,0">
                     <Label Text="Email"/>
-                    <Entry/>
+                    <Entry Text="{Binding Email}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Margin="0,10,0,0">
                     <Label Text="Usuario"/>
-                    <Entry/>
+                    <Entry Text="{Binding User}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="3" Margin="0,10,0,0">
                     <Label Text="Contraseña" Grid.Row="5"/>
-                    <Entry Grid.Row="6"/>
+                    <Entry Grid.Row="6" Text="{Binding Password}"/>
                 </StackLayout>
-                <Button Grid.Row="5" Text="Registrarse"/>
+                <Button Grid.Row="5" Text="Registrarse" Command="{Binding RegistarCommand}"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
