@@ -21,11 +21,11 @@
                 <Image Source="logo.JPG" Grid.Row="0"/>
                 <StackLayout Grid.Row="1">
                     <Label Text="Usuario o Email"/>
-                <Entry Text="{Binding EMail}"/>
+                <Entry Text="{Binding Email}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="2">
                     <Label Text="Contraseña"/>
-                <Entry Text="{Binding Password}"/>
+                <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
                 <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}" Margin="0"/>
                 <Button Grid.Row="4" Text="Registrarse" Command="{Binding RegistrarseCommand}" Margin="0"/>

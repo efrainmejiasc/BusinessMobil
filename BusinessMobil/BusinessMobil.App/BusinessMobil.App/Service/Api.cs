@@ -147,10 +147,6 @@ namespace BusinessMobil.App.Service
             try
             {
                 var client = new HttpClient();
-                //{
-                //    BaseAddress = new Uri(urlBase)
-                //};
-
                 var url = $"{parameter}";
                 var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");

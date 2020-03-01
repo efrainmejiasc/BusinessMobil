@@ -13,13 +13,16 @@ namespace BusinessMobil.App.ViewModel
         public INavigation Navigation { get; set; }
 
         public ICommand ScannerCommand { get; set; }
+        public ICommand RegisterDeviceCommand { get; set; }
 
         public MenuViewModel(INavigation navigation)
         {
             Navigation = navigation;
             ScannerCommand = new Command(async () => await GoToScannerView());
+            RegisterDeviceCommand = new Command(async () => await RegisterDevice());
         }
 
         private async Task GoToScannerView() => await Navigation.PushAsync(new ScannerPage());
+        private async Task RegisterDevice() => await Navigation.PushAsync(new RegisterDevicePage());
     }
 }
