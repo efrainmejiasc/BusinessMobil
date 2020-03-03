@@ -4,12 +4,9 @@ using Plugin.Settings.Abstractions;
 
 namespace BusinessMobil.App.Helpers
 {
-    public class Settings
+    public static class Settings
     {
-        public Settings()
-        {
-        }
-
+        
         static ISettings Setting => CrossSettings.Current;
 
         public static string Token
@@ -30,27 +27,45 @@ namespace BusinessMobil.App.Helpers
             set => Setting.AddOrUpdateValue(nameof(Email), value);
         }
 
+        public static string Id
+        {
+            get => Setting.GetValueOrDefault(nameof(Id), string.Empty);
+            set => Setting.AddOrUpdateValue(nameof(Id), value);
+        }
+
+        public static string User
+        {
+            get => Setting.GetValueOrDefault(nameof(User), string.Empty);
+            set => Setting.AddOrUpdateValue(nameof(User), value);
+        }
+
+        public static string DNI
+        {
+            get => Setting.GetValueOrDefault(nameof(DNI), string.Empty);
+            set => Setting.AddOrUpdateValue(nameof(DNI), value);
+        }
+
         public static string Password
         {
             get => Setting.GetValueOrDefault(nameof(Password), string.Empty);
             set => Setting.AddOrUpdateValue(nameof(Password), value);
         }
 
-        public static string IdCompany
+        public static int IdCompany
         {
-            get => Setting.GetValueOrDefault(nameof(IdCompany), string.Empty);
+            get => Setting.GetValueOrDefault(nameof(IdCompany), 0);
             set => Setting.AddOrUpdateValue(nameof(IdCompany), value);
         }
 
-        public static string IdTypeUser
+        public static int IdTypeUser
         {
-            get => Setting.GetValueOrDefault(nameof(IdTypeUser), string.Empty);
+            get => Setting.GetValueOrDefault(nameof(IdTypeUser), 0);
             set => Setting.AddOrUpdateValue(nameof(IdTypeUser), value);
         }
 
-        public static string Status
+        public static bool Status
         {
-            get => Setting.GetValueOrDefault(nameof(Status), string.Empty);
+            get => Setting.GetValueOrDefault(nameof(Status), false);
             set => Setting.AddOrUpdateValue(nameof(Status), value);
         }
     }

@@ -23,12 +23,17 @@
                     <Label Text="Usuario o Email"/>
                 <Entry Text="{Binding Email}"/>
                 </StackLayout>
-                <StackLayout Grid.Row="2">
+                <StackLayout Grid.Row="2" Margin="0,10,0,0">
                     <Label Text="Contraseña"/>
                 <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
-                <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}" Margin="0"/>
-                <Button Grid.Row="4" Text="Registrarse" Command="{Binding RegistrarseCommand}" Margin="0"/>
+                <StackLayout Grid.Row="3" Margin="0,20,0,0">
+                    <Button Text="Entrar" Command="{Binding EntrarCommand}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="4" Margin="0,20,0,0">
+                    <Button Text="Registrarse" Command="{Binding RegistrarseCommand}"/>
+                </StackLayout>
+                
             </Grid>
         </StackLayout>
     </ContentPage.Content>

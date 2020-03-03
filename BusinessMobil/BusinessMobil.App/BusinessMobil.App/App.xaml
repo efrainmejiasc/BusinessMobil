@@ -13,17 +13,31 @@
         </Style>
 
         <Style TargetType="Label" x:Key="ResultLabel">
-            <Setter Property="TextColor" Value="Blue" />
+            <Setter Property="TextColor" Value="#8C8C8C" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="FontSize" Value="Caption" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#8C8C8C" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
             <Setter Property="FontSize" Value="Medium" />
         </Style>
 
+        <Style TargetType="ContentPage">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+        </Style>
+
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="Wheat" />
+            <Setter Property="BackgroundColor" Value="#F4F4F4" />
             <Setter Property="MinimumWidthRequest" Value="500" />
-            <Setter Property="TextColor" Value="Blue" />
+            <Setter Property="TextColor" Value="#19200F" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             <Setter Property="FontSize" Value="Medium" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#085CA6"/>
+            <Setter Property="TextColor" Value="#FFFFFF"/>
         </Style>
     </Application.Resources>
 </Application>

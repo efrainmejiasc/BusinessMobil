@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
 using BusinessMobil.App.Views;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace BusinessMobil.App.ViewModel
@@ -65,10 +67,19 @@ namespace BusinessMobil.App.ViewModel
             if (!result.IsSuccess)
             {
                 IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert("Error.!", result.Message, "OK");
                 await Application.Current.MainPage.DisplayAlert("Error.!", "El usuario o contraseña no existe.!", "OK");
                 return;
             }
+            var token = JsonConvert.DeserializeObject<Token>(result.Result.ToString());
+            Settings.Email = token.email;
+            Settings.IdCompany = token.idCompany;
+            Settings.IdTypeUser = token.idTypeUser;
+            Settings.Password = user.Password;
+            Settings.Status = token.status;
+            Settings.Token = token.access_token;
+            Settings.TypeToken = token.type_token;
+            Settings.DNI = token.dni;
+            Settings.User = token.user;
 
             await Navigation.PushAsync(new MainPage());
         }

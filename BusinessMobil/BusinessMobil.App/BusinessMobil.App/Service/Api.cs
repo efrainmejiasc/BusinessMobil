@@ -68,7 +68,7 @@ namespace BusinessMobil.App.Service
                 //};
 
                 var url = $"{parameter}";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.access_token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
                 var result = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -108,7 +108,7 @@ namespace BusinessMobil.App.Service
             {
                 var client = new HttpClient();
                 var url = $"{parameter}";
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.access_token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
                 var result = await response.Content.ReadAsStringAsync();
                 if (!response.IsSuccessStatusCode)
@@ -187,7 +187,7 @@ namespace BusinessMobil.App.Service
                 //{
                 //    BaseAddress = new Uri(urlBase)
                 //};
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.access_token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
                 var url = $"{parameter}";
                 var json = JsonConvert.SerializeObject(data);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
