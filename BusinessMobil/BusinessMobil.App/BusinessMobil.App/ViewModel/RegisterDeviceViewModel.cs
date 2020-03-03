@@ -84,6 +84,23 @@ namespace BusinessMobil.App.ViewModel
 
         async Task  RegisterDevice()
         {
+
+            if (string.IsNullOrEmpty(Phone))
+            {
+                await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Debe instroducir el numero del Dispositivo!", "Ok");
+                return;
+            }
+            if (Dni == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Debe instroducir el DNI!", "Ok");
+                return;
+            }
+            if (string.IsNullOrEmpty(Codigo))
+            {
+                await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Debe instroducir el Codigo!", "Ok");
+                return;
+            }
+
             var register = new RegisterDeviceModel()
             {
                 Codigo = Codigo,
@@ -98,7 +115,7 @@ namespace BusinessMobil.App.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
                 return;
             }
-            
+            await Application.Current.MainPage.DisplayAlert("Registro de Dispositivo", "Se ha registrado con exito!","Ok");
             await Navigation.PushAsync(new MainPage());
         }
     }

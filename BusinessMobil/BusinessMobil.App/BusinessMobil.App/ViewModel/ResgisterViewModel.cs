@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
+using BusinessMobil.App.Views;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -54,23 +55,40 @@ namespace BusinessMobil.App.ViewModel
 
         async Task Registar()
         {
-
-            if (string.IsNullOrEmpty(Email))
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "", "Ok");
-                return;
-            }
+                if (string.IsNullOrEmpty(Email))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Introdusca el Email!", "Ok");
+                    return;
+                }
 
-            var register = new RegisterModel { Email = Email, User = User, Password = Password };
-            var result = await api.PostRespondeAsync<RegisterModel>("UserApi/CreateUser",register);
-            if(!result.IsSuccess)
+                if (string.IsNullOrEmpty(User))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Instrodusca un Usuario!", "Ok");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Password))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Instrodusca la Contraseña!", "Ok");
+                    return;
+                }
+
+                var register = new RegisterModel { Email = Email, User = User, Password = Password };
+                var result = await api.PostRespondeAsync<RegisterModel>("UserApi/CreateUser", register);
+                if (!result.IsSuccess)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
+                    return;
+                }
+                await Application.Current.MainPage.DisplayAlert("Registro de Usuario", "Se ha registrado con exito!", "Ok");
+                await Navigation.PushAsync(new Login());
+            }
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error!", result.Message,"Ok");
-                return;
-            }
-            var token = JsonConvert.DeserializeObject<Token>(result.Result.ToString());
 
-            await Navigation.PushAsync(new MainPage());
+            }
         }
     }
 }

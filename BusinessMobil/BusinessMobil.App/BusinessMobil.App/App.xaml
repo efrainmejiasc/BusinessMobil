@@ -19,7 +19,7 @@
         </Style>
 
         <Style TargetType="Label">
-            <Setter Property="TextColor" Value="#8C8C8C" />
+            <Setter Property="TextColor" Value="#5ED907" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
             <Setter Property="FontSize" Value="Medium" />
         </Style>

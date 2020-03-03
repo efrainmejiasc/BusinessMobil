@@ -10,31 +10,33 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-            <StackLayout Margin="0,30,0,0" Grid.Row="0">
-                <Label Text="Numero de telèfono"/>
-                <Entry Text="{Binding Phone}"/>
-            </StackLayout>
-            <StackLayout Margin="0,10,0,0" Grid.Row="1">
-                <Label Text="DNI"/>
-                <Entry Text="{Binding Dni}"/>
-            </StackLayout>
-            <StackLayout Margin="0,10,0,0" Grid.Row="2">
-                <Label Text="Codigo de Registro"/>
-                <Entry Text="{Binding Codigo}"/>
-            </StackLayout>
-            <StackLayout Grid.Row="3">
-                <Button Text="Registrar" Command="{Binding RegisterCommand}"/>
-            </StackLayout>
-        </Grid>
+        <ScrollView>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Margin="0,30,0,0" Grid.Row="0">
+                    <Label Text="Numero de telèfono"/>
+                    <Entry Text="{Binding Phone}"/>
+                </StackLayout>
+                <StackLayout Margin="0,10,0,0" Grid.Row="1">
+                    <Label Text="DNI"/>
+                    <Entry Text="{Binding Dni}"/>
+                </StackLayout>
+                <StackLayout Margin="0,10,0,0" Grid.Row="2">
+                    <Label Text="Codigo de Registro"/>
+                    <Entry Text="{Binding Codigo}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="3">
+                    <Button Text="Registrar" Command="{Binding RegisterCommand}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

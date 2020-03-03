@@ -61,27 +61,33 @@ namespace BusinessMobil.App.ViewModel
                 return;
             }
 
-            var user = new LoginModel { Email = Email, Password = Password, User = Email };
-            var result = await api.PostRespondeAsync<LoginModel>("UserApi/Login", user);
-
-            if (!result.IsSuccess)
+            try
             {
-                IsRunning = false;
-                await Application.Current.MainPage.DisplayAlert("Error.!", "El usuario o contraseña no existe.!", "OK");
-                return;
-            }
-            var token = JsonConvert.DeserializeObject<Token>(result.Result.ToString());
-            Settings.Email = token.email;
-            Settings.IdCompany = token.idCompany;
-            Settings.IdTypeUser = token.idTypeUser;
-            Settings.Password = user.Password;
-            Settings.Status = token.status;
-            Settings.Token = token.access_token;
-            Settings.TypeToken = token.type_token;
-            Settings.DNI = token.dni;
-            Settings.User = token.user;
+                var user = new LoginModel { Email = Email, Password = Password, User = Email };
+                var result = await api.PostRespondeAsync<LoginModel>("UserApi/Login", user);
 
-            await Navigation.PushAsync(new MainPage());
+                if (!result.IsSuccess)
+                {
+                    IsRunning = false;
+                    await Application.Current.MainPage.DisplayAlert("Error.!", "El usuario o contraseña no existe.!", "OK");
+                    return;
+                }
+                var token = JsonConvert.DeserializeObject<Token>(result.Result.ToString());
+                Settings.Email = token.email;
+                Settings.IdCompany = token.idCompany;
+                Settings.IdTypeUser = token.idTypeUser;
+                Settings.Password = user.Password;
+                Settings.Status = token.status;
+                Settings.Token = token.access_token;
+                Settings.TypeToken = token.type_token;
+                Settings.DNI = token.dni;
+                Settings.User = token.user;
+
+                await Navigation.PushAsync(new MainPage());
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
