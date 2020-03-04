@@ -11,7 +11,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <Grid Margin="10">
+            <Grid Style="{StaticResource MargenContentPage}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

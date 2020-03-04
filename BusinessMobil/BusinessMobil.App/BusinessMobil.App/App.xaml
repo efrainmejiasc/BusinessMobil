@@ -28,6 +28,17 @@
             <Setter Property="BackgroundColor" Value="#FFFFFF"/>
         </Style>
 
+        <Style TargetType="StackLayout" x:Key="MargenControl">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+        <Style TargetType="StackLayout" x:Key="MargenButton">
+            <Setter Property="Margin" Value="0,20,0,0"/>
+        </Style>
+
+        <Style TargetType="Grid" x:Key="MargenContentPage">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
         <Style TargetType="Entry">
             <Setter Property="BackgroundColor" Value="#F4F4F4" />
             <Setter Property="MinimumWidthRequest" Value="500" />
@@ -38,6 +49,7 @@
         <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="#085CA6"/>
             <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="HeightRequest" Value="60"/>
         </Style>
     </Application.Resources>
 </Application>

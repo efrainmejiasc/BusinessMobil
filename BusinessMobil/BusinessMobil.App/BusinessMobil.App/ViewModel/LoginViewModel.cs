@@ -83,7 +83,9 @@ namespace BusinessMobil.App.ViewModel
                 Settings.DNI = token.dni;
                 Settings.User = token.user;
 
-                await Navigation.PushAsync(new MainPage());
+
+                //await Navigation.PushAsync(new MainPage());
+                Application.Current.MainPage = new MasterPage();
             }
             catch (Exception ex)
             {

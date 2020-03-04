@@ -6,26 +6,28 @@
              mc:Ignorable="d"
              x:Class="BusinessMobil.App.Views.ScannerPage">
     <ContentPage.Content>
-        <StackLayout Margin="10" Padding="10">
-            <Button 
+        <ScrollView>
+            <StackLayout Style="{StaticResource MargenContentPage}" Padding="10">
+                <Button 
                 Text="Escanear código" 
                 Command="{Binding ScannerCommand}" />
 
-            <Label 
+                <Label 
                 Style="{StaticResource NormalLabel}"
                 Text="Resultado" />
 
-            <Label 
+                <Label 
                 Style="{StaticResource ResultLabel}"
                 Text="{Binding BarcodeText}" />
 
-            <Label 
+                <Label 
                 Style="{StaticResource NormalLabel}"
                 Text="Formato" />
 
-            <Label
+                <Label
                 Style="{StaticResource ResultLabel}"
                 Text="{Binding BarcodeFormat}" />
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
