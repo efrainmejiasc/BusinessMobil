@@ -19,7 +19,8 @@ namespace BusinessMobil.App.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            App.Navigator = this.Navigation;
+            App.Navigator = this.Navigator;
+            App.Master = this;
         }
     }
 }

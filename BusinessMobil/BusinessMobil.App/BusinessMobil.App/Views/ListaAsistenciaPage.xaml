@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             x:Class="BusinessMobil.App.Views.ListaAsistenciaPage"
+             Title="Listado de Asistencia">
+
+    <ContentPage.BindingContext>
+        <viewModel:ListaAsistenciaViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="{Binding ImageSource}"
+                                   WidthRequest="100"
+                                   HeightRequest="100"
+                                   VerticalOptions="Start"/>
+                            <StackLayout Grid.Column="1" Orientation="Vertical">
+                                <Label Text="{Binding Nombre}"
+                                       FontSize="20" TextColor="Black"
+                                       HorizontalOptions="FillAndExpand"/>
+
+                                <Label Text="{Binding Apellido}"
+                                       FontSize="20" TextColor="Black"
+                                     HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -4,6 +4,7 @@ using BusinessMobil.App.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace BusinessMobil.App.ViewModel
             Grado = "octavo";
             Grupo = "A";
             IdTurno = 1;
+            Task.FromResult(GetListadoAsistenciaAsync());
         }
 
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
@@ -33,7 +35,6 @@ namespace BusinessMobil.App.ViewModel
         }
 
         private int idCompany;
-
         public int IdCompany
         {
             get { return idCompany; }
@@ -41,7 +42,6 @@ namespace BusinessMobil.App.ViewModel
         }
 
         private string grado;
-
         public string Grado
         {
             get { return grado; }
@@ -49,7 +49,6 @@ namespace BusinessMobil.App.ViewModel
         }
 
         private string grupo;
-
         public string Grupo
         {
             get { return grupo; }
@@ -57,7 +56,6 @@ namespace BusinessMobil.App.ViewModel
         }
 
         private int idTurno;
-
         public int IdTurno
         {
             get { return idTurno; }
@@ -73,8 +71,37 @@ namespace BusinessMobil.App.ViewModel
                 return;
             }
 
-            var listAsistencia = result.Result as ObservableCollection<ListadoAsistenciaModel>;
+            try
+            {
+                Funciones.Funciones f = new Funciones.Funciones();
 
+                var listAsistencia = result.Result as ObservableCollection<ListadoAsistenciaModel>;
+                ListadoAsistencias = new ObservableCollection<ListadoAsistenciaModel>
+                    (
+                    listAsistencia.Select(s => new ListadoAsistenciaModel
+                    {
+                        Apellido = s.Apellido,
+                        Company = s.Company,
+                        Date = s.Date,
+                        Dni = s.Dni,
+                        Email = s.Email,
+                        Grado = s.Grado,
+                        Grupo = s.Grupo,
+                        Id = s.Id,
+                        IdCompany = s.IdCompany,
+                        Matricula = s.Matricula,
+                        Nombre = s.Nombre,
+                        Rh = s.Rh,
+                        Status = s.Status,
+                        Turno = s.Turno,
+                        ImageSource = f.Base64ToImage(s.Foto)
+                    })
+                    );
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

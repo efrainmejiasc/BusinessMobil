@@ -8,7 +8,8 @@ namespace BusinessMobil.App
 {
     public partial class App : Application
     {
-        public static INavigation Navigator { get; internal set; }
+        public static NavigationPage Navigator { get; internal set; }
+        public static MasterPage Master { get; internal set; }
 
         public App()
         {
@@ -27,7 +28,7 @@ namespace BusinessMobil.App
             //else
             //  MainPage = new NavigationPage(new MainPage());
 
-
+            
 
         }
 

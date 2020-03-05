@@ -3,13 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
              mc:Ignorable="d"
+             Title="Menu"
              x:Class="BusinessMobil.App.Views.MenuPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:MenuViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}" Margin="0,40,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="1" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" TextColor="Black" Text="{Binding Title}"></Label>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

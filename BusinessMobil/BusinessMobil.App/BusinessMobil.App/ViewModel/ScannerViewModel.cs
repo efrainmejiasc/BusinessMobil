@@ -59,7 +59,7 @@ namespace BusinessMobil.App.ViewModel
             var overlay = new ZXingDefaultOverlay
             {
                 ShowFlashButton = false,
-                TopText = "Coloca el código de barras frente al dispositivo",
+                TopText = "Coloca el código QR frente al dispositivo",
                 BottomText = "El escaneo es automático",
                 Opacity = 0.75
             };
@@ -67,10 +67,10 @@ namespace BusinessMobil.App.ViewModel
 
             var page = new ZXingScannerPage(options, overlay)
             {
-                Title = "Escanear Codigo",
+                Title = "Escanear QR",
                 DefaultOverlayShowFlashButton = true,
             };
-            await Navigation.PushAsync(page);
+            await App.Navigator.PushAsync(page);
 
             page.OnScanResult += (result) =>
             {

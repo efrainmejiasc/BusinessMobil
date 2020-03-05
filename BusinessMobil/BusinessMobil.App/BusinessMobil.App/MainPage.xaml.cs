@@ -17,7 +17,6 @@ namespace BusinessMobil.App
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MenuViewModel(this.Navigation);
         }
     }
 }
