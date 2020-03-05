@@ -13,8 +13,49 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ListView HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}" Margin="0,40,0,0">
+        <Grid RowSpacing="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>
+                <Grid Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="120"
+                      VerticalOptions="End" Margin="12,48">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Column="0"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Source="logo"
+                           Aspect="AspectFit"
+                           HeightRequest="80" Margin="12,0"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="Willians J Melendez O" FontSize="28" TextColor="Black"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="Profesor" TextColor="Black" FontSize="18"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>
+                <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True"
+                          SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}"
+                          Margin="0,40,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -29,13 +70,14 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="1" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" TextColor="Black" Text="{Binding Title}"></Label>
+                                <Label Grid.Column="1" FontAttributes="None" FontSize="20" VerticalOptions="Center" TextColor="Black" Text="{Binding Title}"></Label>
 
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

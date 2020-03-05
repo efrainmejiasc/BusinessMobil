@@ -18,7 +18,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Image Source="logo.JPG" Grid.Row="0"/>
+                <Image Source="logo" Grid.Row="0"/>
                 <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}">
                     <Label Text="Usuario o Email"/>
                 <Entry Text="{Binding Email}"/>
