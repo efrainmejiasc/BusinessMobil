@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessMobil.App.Controls;
+using BusinessMobil.App.Controls.Interface;
 using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
@@ -63,6 +65,10 @@ namespace BusinessMobil.App.ViewModel
 
             try
             {
+                DependencyService.Get<ILodingPageService>().InitLoadingPage(new LoadIndicator());
+                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                await Task.Delay(100);
+
                 var user = new LoginModel { Email = Email, Password = Password, User = Email };
                 var result = await api.PostRespondeAsync<LoginModel>("UserApi/Login", user);
 
@@ -85,6 +91,7 @@ namespace BusinessMobil.App.ViewModel
 
                 //await Navigation.PushAsync(new MainPage());
                 Application.Current.MainPage = new MasterPage();
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
             }
             catch (Exception ex)
             {

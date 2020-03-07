@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BusinessMobil.App.Controls;
+using BusinessMobil.App.Controls.Interface;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace BusinessMobil.App.ViewModel
@@ -43,6 +46,13 @@ namespace BusinessMobil.App.ViewModel
         {
             get => isEnable;
             set => SetValue(ref isEnable, value);
+        }
+
+        public async void ShowLoad()
+        {
+            DependencyService.Get<ILodingPageService>().InitLoadingPage(new LoadIndicator());
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            await Task.Delay(100);
         }
     }
 }

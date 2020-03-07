@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessMobil.App.Controls;
+using BusinessMobil.App.Controls.Interface;
 using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
@@ -70,7 +72,12 @@ namespace BusinessMobil.App.ViewModel
         }
         async void GenerarLista()
         {
-            await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
+            //await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
+            //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            await Task.Delay(100);
+
             IsRunning = true;
             IsEnable = false;
             var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
@@ -106,6 +113,8 @@ namespace BusinessMobil.App.ViewModel
                         //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
+
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await App.Navigator.PushAsync(new ListaAsistenciaPage(listadoAsistencias));
                 IsRunning = false;
                 IsEnable = true;
