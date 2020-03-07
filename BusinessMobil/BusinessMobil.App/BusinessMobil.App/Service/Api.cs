@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessMobil.App.Views;
 using Newtonsoft.Json;
 
 namespace BusinessMobil.App.Service
@@ -27,6 +28,17 @@ namespace BusinessMobil.App.Service
                 var url = $"{parameter}";
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
                 var result = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode.ToString() == "401")
+                {
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
@@ -71,6 +83,18 @@ namespace BusinessMobil.App.Service
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
                 var result = await response.Content.ReadAsStringAsync();
+                var code = response.StatusCode;
+                
+                if (code.ToString() == "Unauthorized")
+                {
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
@@ -110,7 +134,19 @@ namespace BusinessMobil.App.Service
                 var url = $"{parameter}";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
+                
                 var result = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode.ToString() == "401")
+                {
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
@@ -153,6 +189,16 @@ namespace BusinessMobil.App.Service
                 var response = client.PostAsync($"{urlBase}/{url}", content).Result;
                 var result = await response.Content.ReadAsStringAsync();
 
+                if (response.StatusCode.ToString() == "401")
+                {
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response
@@ -193,6 +239,17 @@ namespace BusinessMobil.App.Service
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = client.PostAsync($"{urlBase}/{url}", content).Result;
                 var result = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode.ToString() == "401")
+                {
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Response

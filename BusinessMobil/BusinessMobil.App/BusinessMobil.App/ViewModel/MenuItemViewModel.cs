@@ -27,8 +27,8 @@ namespace BusinessMobil.App.ViewModel
                 case "RegisterDevicePage":
                     await App.Navigator.PushAsync(new RegisterDevicePage());
                     break;
-                case "ListaAsistenciaPage":
-                    await App.Navigator.PushAsync(new ListaAsistenciaPage());
+                case "GenerarListaAsistenciaPage":
+                    await App.Navigator.PushAsync(new GenerarListaAsistenciaPage());
                     break;
                 default:
                     break;

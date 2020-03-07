@@ -1,29 +1,35 @@
-﻿using BusinessMobil.App.Helpers;
-using BusinessMobil.App.Model;
-using BusinessMobil.App.Service;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using BusinessMobil.App.Helpers;
+using BusinessMobil.App.Model;
+using BusinessMobil.App.Service;
+using BusinessMobil.App.Views;
+using Xamarin.Forms;
 
 namespace BusinessMobil.App.ViewModel
 {
-    public class ListaAsistenciaViewModel : BaseViewModel
+    public class GenerarListaAsistenciaViewModel : BaseViewModel
     {
-        Api api;
-        public ListaAsistenciaViewModel(ObservableCollection<ListadoAsistenciaModel> _listadoAsistencias)
+        Api api = new Api();
+        public GenerarListaAsistenciaViewModel()
         {
-            //api = new Api();
-            //IdCompany = 1;
-            //Grado = "octavo";
-            //Grupo = "A";
-            //IdTurno = 1;
-            //Task.FromResult(GetListadoAsistenciaAsync());
-            ListadoAsistencias = _listadoAsistencias;
+            IdCompany = 1;
+            Grado = "octavo";
+            Grupo = "A";
+            IdTurno = 1;
+            IsRunning = false;
+            IsEnable = true;
         }
-
+        public ICommand GenerarListaAsistenciaCommand
+        {
+            get
+            {               
+                return new Command(GenerarLista);
+            }
+        }
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
         public ObservableCollection<ListadoAsistenciaModel> ListadoAsistencias
         {
@@ -62,20 +68,22 @@ namespace BusinessMobil.App.ViewModel
             get { return idTurno; }
             set { idTurno = value; }
         }
-
-
-        async Task GetListadoAsistenciaAsync()
+        async void GenerarLista()
         {
-            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken});
+            await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
+            IsRunning = true;
+            IsEnable = false;
+            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
+                IsRunning = false;
+                IsEnable = true;
                 return;
             }
 
             try
             {
                 Funciones.Funciones f = new Funciones.Funciones();
-
                 var listAsistencia = result.Result as ObservableCollection<ListadoAsistenciaModel>;
                 ListadoAsistencias = new ObservableCollection<ListadoAsistenciaModel>
                     (
@@ -95,13 +103,17 @@ namespace BusinessMobil.App.ViewModel
                         Rh = s.Rh,
                         Status = s.Status,
                         Turno = s.Turno,
-                        ImageSource = f.Base64ToImage(s.Foto)
+                        //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
+                await App.Navigator.PushAsync(new ListaAsistenciaPage(listadoAsistencias));
+                IsRunning = false;
+                IsEnable = true;
             }
             catch (Exception ex)
             {
-
+                IsRunning = false;
+                IsEnable = true;
             }
         }
     }

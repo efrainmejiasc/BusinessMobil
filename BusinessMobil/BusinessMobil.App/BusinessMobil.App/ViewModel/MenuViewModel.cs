@@ -39,7 +39,7 @@ namespace BusinessMobil.App.ViewModel
             {
                 new MenuModel { Icon = "", Title = "Escanear QR", PageName = "ScannerPage" },
                 new MenuModel { Icon = "", Title = "Registrar Dispositivo", PageName = "RegisterDevicePage" },
-                new MenuModel { Icon = "", Title = "Lista de Asistencia", PageName = "ListaAsistenciaPage" },
+                new MenuModel { Icon = "", Title = "Lista de Asistencia", PageName = "GenerarListaAsistenciaPage" },
                 //new MenuModel { Icon = "", Title = "Escanear QR", PageName = "ScannerPage" }
             };
 

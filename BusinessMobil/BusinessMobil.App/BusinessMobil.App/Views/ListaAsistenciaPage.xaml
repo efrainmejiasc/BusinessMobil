@@ -5,10 +5,6 @@
              x:Class="BusinessMobil.App.Views.ListaAsistenciaPage"
              Title="Listado de Asistencia">
 
-    <ContentPage.BindingContext>
-        <viewModel:ListaAsistenciaViewModel/>
-    </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True">
