@@ -65,8 +65,8 @@ namespace BusinessMobil.App.ViewModel
 
             try
             {
-                DependencyService.Get<ILodingPageService>().InitLoadingPage(new LoadIndicator());
-                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                //DependencyService.Get<ILodingPageService>().InitLoadingPage(new LoadIndicator());
+                //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
                 await Task.Delay(100);
 
                 var user = new LoginModel { Email = Email, Password = Password, User = Email };
@@ -75,7 +75,9 @@ namespace BusinessMobil.App.ViewModel
                 if (!result.IsSuccess)
                 {
                     IsRunning = false;
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await Application.Current.MainPage.DisplayAlert("Error.!", "El usuario o contraseña no existe.!", "OK");
+                    
                     return;
                 }
                 var token = JsonConvert.DeserializeObject<Token>(result.Result.ToString());
@@ -89,9 +91,9 @@ namespace BusinessMobil.App.ViewModel
                 Settings.DNI = token.dni;
                 Settings.User = token.user;
 
-                //await Navigation.PushAsync(new MainPage());
+                //DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 Application.Current.MainPage = new MasterPage();
-                DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                
             }
             catch (Exception ex)
             {

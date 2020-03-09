@@ -24,6 +24,11 @@ namespace BusinessMobil.App.ViewModel
             IdTurno = 1;
             IsRunning = false;
             IsEnable = true;
+
+            Grupos.Add("A");
+            Grados.Add("Octavo");
+            Turnos.Add("Mañana");
+
         }
         public ICommand GenerarListaAsistenciaCommand
         {
@@ -32,6 +37,28 @@ namespace BusinessMobil.App.ViewModel
                 return new Command(GenerarLista);
             }
         }
+
+        ObservableCollection<string> grupos;
+        public ObservableCollection<string> Grupos
+        {
+            get => grupos;
+            set => SetValue(ref grupos, value);
+        }
+
+        ObservableCollection<string> grados;
+        public ObservableCollection<string> Grados
+        {
+            get => grados;
+            set => SetValue(ref grados, value);
+        }
+
+        ObservableCollection<string> turnos;
+        public ObservableCollection<string> Turnos
+        {
+            get => turnos;
+            set => SetValue(ref turnos, value);
+        }
+
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
         public ObservableCollection<ListadoAsistenciaModel> ListadoAsistencias
         {
@@ -110,7 +137,7 @@ namespace BusinessMobil.App.ViewModel
                         Rh = s.Rh,
                         Status = s.Status,
                         Turno = s.Turno,
-                        //ImageSource = f.Base64ToImage(s.Foto)
+                        ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
 

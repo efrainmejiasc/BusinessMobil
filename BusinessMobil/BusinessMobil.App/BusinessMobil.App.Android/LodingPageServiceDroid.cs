@@ -80,7 +80,14 @@ namespace BusinessMobil.App.Droid
         public void HideLoadingPage()
         {
             // Hide the page
-            _dialog.Hide();
+            try
+            {
+                _dialog.Hide();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 

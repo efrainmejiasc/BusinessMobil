@@ -17,8 +17,8 @@ namespace BusinessMobil.App.ViewModel
 
         public RegisterDeviceViewModel()
         {
-            Phone = CrossDevice.Device.DeviceId;
-            Codigo = Settings.IdCompany.ToString();
+            //Phone = CrossDevice.Device.DeviceId;
+            //Codigo = Settings.IdCompany.ToString();
             User = Settings.User;
             Email = Settings.Email;
             api = new Api();
@@ -71,8 +71,8 @@ namespace BusinessMobil.App.ViewModel
             }
         }
 
-        double dni;
-        public double Dni
+        double? dni;
+        public double? Dni
         {
             get => dni;
             set
@@ -90,7 +90,7 @@ namespace BusinessMobil.App.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Debe instroducir el numero del Dispositivo!", "Ok");
                 return;
             }
-            if (Dni == 0)
+            if (Dni == null || Dni.Value == 0)
             {
                 await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Debe instroducir el DNI!", "Ok");
                 return;
@@ -107,7 +107,7 @@ namespace BusinessMobil.App.ViewModel
                 User = User,
                 Email = Email,
                 Phone = Phone,
-                Dni = Dni
+                Dni = Dni.Value
             };
             var result = await api.PostRespondeAsync("DeviceApi/RegisterDevice", register,new Token() { access_token =  Settings.Token, type_token = Settings.TypeToken});
             if (!result.IsSuccess)
