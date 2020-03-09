@@ -25,6 +25,10 @@ namespace BusinessMobil.App.ViewModel
             IsRunning = false;
             IsEnable = true;
 
+            Grupos = new ObservableCollection<string>();
+            Grados = new ObservableCollection<string>();
+            Turnos = new ObservableCollection<string>();
+
             Grupos.Add("A");
             Grados.Add("Octavo");
             Turnos.Add("Mañana");

@@ -4,8 +4,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessMobil.App.Controls.Interface;
 using BusinessMobil.App.Views;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace BusinessMobil.App.Service
 {
@@ -20,6 +22,7 @@ namespace BusinessMobil.App.Service
         {
             try
             {
+                
                 var client = new HttpClient();
                 //{
                 //    BaseAddress = new Uri(urlBase)
@@ -29,8 +32,9 @@ namespace BusinessMobil.App.Service
                 var response = client.GetAsync($"{urlBase}/{url}").Result;
                 var result = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode.ToString() == "401")
+                if (response.StatusCode.ToString() == "Unauthorized")
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await App.Navigator.PushAsync(new Login());
                     return new Response
                     {
@@ -74,6 +78,7 @@ namespace BusinessMobil.App.Service
         {
             try
             {
+                
                 var client = new HttpClient();
                 //{
                 //    BaseAddress = new Uri(urlBase)
@@ -87,6 +92,7 @@ namespace BusinessMobil.App.Service
                 
                 if (code.ToString() == "Unauthorized")
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await App.Navigator.PushAsync(new Login());
                     return new Response
                     {
@@ -137,8 +143,9 @@ namespace BusinessMobil.App.Service
                 
                 var result = await response.Content.ReadAsStringAsync();
 
-                if(response.StatusCode.ToString() == "401")
+                if(response.StatusCode.ToString() == "Unauthorized")
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await App.Navigator.PushAsync(new Login());
                     return new Response
                     {
@@ -189,8 +196,9 @@ namespace BusinessMobil.App.Service
                 var response = client.PostAsync($"{urlBase}/{url}", content).Result;
                 var result = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode.ToString() == "401")
+                if (response.StatusCode.ToString() == "Unauthorized")
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await App.Navigator.PushAsync(new Login());
                     return new Response
                     {
@@ -240,8 +248,9 @@ namespace BusinessMobil.App.Service
                 var response = client.PostAsync($"{urlBase}/{url}", content).Result;
                 var result = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode.ToString() == "401")
+                if (response.StatusCode.ToString() == "Unauthorized")
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await App.Navigator.PushAsync(new Login());
                     return new Response
                     {

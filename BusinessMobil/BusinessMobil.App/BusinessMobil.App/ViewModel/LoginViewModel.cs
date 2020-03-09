@@ -66,7 +66,7 @@ namespace BusinessMobil.App.ViewModel
             try
             {
                 //DependencyService.Get<ILodingPageService>().InitLoadingPage(new LoadIndicator());
-                //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
                 await Task.Delay(100);
 
                 var user = new LoginModel { Email = Email, Password = Password, User = Email };
@@ -91,7 +91,7 @@ namespace BusinessMobil.App.ViewModel
                 Settings.DNI = token.dni;
                 Settings.User = token.user;
 
-                //DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 Application.Current.MainPage = new MasterPage();
                 
             }
