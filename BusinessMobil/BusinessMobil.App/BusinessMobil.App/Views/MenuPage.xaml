@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>
+                <!--<BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>-->
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="120"
                       VerticalOptions="End" Margin="12,48">
                     <Grid.ColumnDefinitions>
@@ -41,7 +41,7 @@
                     <Image Grid.Column="0"
                            Grid.Row="0"
                            Grid.RowSpan="2"
-                           Source="logo.png"
+                           Source="user"
                            Aspect="AspectFit"
                            HeightRequest="80" Margin="12,0"/>
                     <Label Grid.Column="1"
@@ -62,7 +62,7 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>
+                <!--<BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>-->
                 <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True"
                           SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}"
                           Margin="0,40,0,0">

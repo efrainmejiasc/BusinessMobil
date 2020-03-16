@@ -97,6 +97,7 @@ namespace BusinessMobil.App.ViewModel
             }
             catch (Exception ex)
             {
+                await Application.Current.MainPage.DisplayAlert("Error.!", ex.Message, "OK");
             }
         }
     }
