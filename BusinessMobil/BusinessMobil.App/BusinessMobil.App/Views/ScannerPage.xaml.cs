@@ -16,7 +16,7 @@ namespace BusinessMobil.App.Views
         public ScannerPage()
         {
             InitializeComponent();
-            BindingContext = new ScannerViewModel(this.Navigation);
+            BindingContext = new ScannerViewModel();
         }
     }
 }
