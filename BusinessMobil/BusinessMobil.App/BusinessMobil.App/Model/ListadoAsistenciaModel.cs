@@ -22,6 +22,7 @@ namespace BusinessMobil.App.Model
         public string Foto { get; set; }
         public string Qr { get; set; }
         public int Turno { get; set; }
+        public string Identificador { get; set; }
         public Xamarin.Forms.ImageSource ImageSource { get; set; }
     }
 }

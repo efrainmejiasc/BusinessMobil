@@ -8,11 +8,14 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True" SelectedItem="{Binding SelectItem,Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="80">
                             <Grid Margin="10,5,0,5">
+                                <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectAsistenciaCommand}"/>
+                                </Grid.GestureRecognizers>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="*"/>
@@ -43,7 +46,7 @@
                                        FontSize="15" TextColor="Black"
                                      HorizontalOptions="FillAndExpand"/>
                                 </StackLayout>
-                                <CheckBox Grid.Column="2"/>
+                                <CheckBox Grid.Column="2" IsChecked="{Binding SelectAsistencia}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace BusinessMobil.App.ViewModel
 {
@@ -21,8 +23,11 @@ namespace BusinessMobil.App.ViewModel
             //Grupo = "A";
             //IdTurno = 1;
             //Task.FromResult(GetListadoAsistenciaAsync());
+            //SelectAsistenciaCommand = new Command(async () => await GetSelectAsistencia());
             ListadoAsistencias = _listadoAsistencias;
         }
+
+        public ICommand SelectAsistenciaCommand { get; set; }
 
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
         public ObservableCollection<ListadoAsistenciaModel> ListadoAsistencias
@@ -63,7 +68,26 @@ namespace BusinessMobil.App.ViewModel
             set { idTurno = value; }
         }
 
+        private ListadoAsistenciaModel _SelectItem;
+        public ListadoAsistenciaModel SelectItem
+        {
+            get => _SelectItem;
+            set
+            {
+                SetValue(ref _SelectItem, value);
+                if (_SelectItem != null)
+                    GetSelectAsistencia();
+            }
+        }
 
+        private void GetSelectAsistencia()
+        {
+            if (SelectItem != null)
+            {
+                var asistencia = ListadoAsistencias.FirstOrDefault(f => f.Id == SelectItem.Id);
+                asistencia.SelectAsistencia = true;
+            }
+        }
         async Task GetListadoAsistenciaAsync()
         {
             var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken});

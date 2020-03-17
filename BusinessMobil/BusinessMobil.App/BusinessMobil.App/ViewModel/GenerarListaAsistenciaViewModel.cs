@@ -42,6 +42,8 @@ namespace BusinessMobil.App.ViewModel
             }
         }
 
+        
+
         ObservableCollection<string> grupos;
         public ObservableCollection<string> Grupos
         {
@@ -101,6 +103,7 @@ namespace BusinessMobil.App.ViewModel
             get { return idTurno; }
             set { idTurno = value; }
         }
+
         async void GenerarLista()
         {
             //await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
@@ -140,7 +143,9 @@ namespace BusinessMobil.App.ViewModel
                         Nombre = s.Nombre,
                         Rh = s.Rh,
                         Status = s.Status,
-                        Turno = s.Turno,
+                        Turno = s.Turno, 
+                        Identificador = s.Identificador, 
+                        Foto = s.Foto,
                         ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
