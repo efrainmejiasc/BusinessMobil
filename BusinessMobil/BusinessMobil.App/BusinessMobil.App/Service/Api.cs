@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -234,6 +235,61 @@ namespace BusinessMobil.App.Service
         }
 
         public async Task<Response> PostRespondeAsync<T>(string parameter, T data, Token token)
+        {
+            try
+            {
+                var client = new HttpClient();
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.type_token, token.access_token);
+                var url = $"{parameter}";
+                var json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = client.PostAsync($"{urlBase}/{url}", content).Result;
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode.ToString() == "Unauthorized")
+                {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = result
+                };
+
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("Application/json"));
+                //var response = client.GetAsync($"{url}/{parameter}");
+                //var data = JsonConvert.DeserializeObject<List<T>>(response);
+
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+        public async Task<Response> PostListRespondeAsync<T>(string parameter, List<T> data, Token token)
         {
             try
             {

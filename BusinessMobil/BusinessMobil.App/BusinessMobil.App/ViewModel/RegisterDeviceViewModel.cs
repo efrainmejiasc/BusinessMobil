@@ -116,7 +116,7 @@ namespace BusinessMobil.App.ViewModel
                 return;
             }
             await Application.Current.MainPage.DisplayAlert("Registro de Dispositivo", "Se ha registrado con exito!","Ok");
-            await Navigation.PushAsync(new MainPage());
+            await App.Navigator.PushAsync(new MainPage());
         }
     }
 }

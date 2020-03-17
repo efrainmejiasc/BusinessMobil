@@ -5,10 +5,12 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="BusinessMobil.App.Views.ListaAsistenciaPage"
              Title="Listado de Asistencia">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Enviar Asistencia" Command="{Binding GenerarAsistenciaCommand}" Priority="0"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True" SelectedItem="{Binding SelectItem,Mode=TwoWay}">
+            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True" SelectedItem="{Binding SelectItem,Mode=TwoWay}" IsPullToRefreshEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="80">
@@ -46,7 +48,7 @@
                                        FontSize="15" TextColor="Black"
                                      HorizontalOptions="FillAndExpand"/>
                                 </StackLayout>
-                                <CheckBox Grid.Column="2" IsChecked="{Binding SelectAsistencia}"/>
+                                <CheckBox Grid.Column="2" IsChecked="{Binding Status}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

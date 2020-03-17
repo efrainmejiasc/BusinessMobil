@@ -1,6 +1,7 @@
 ﻿using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
+using BusinessMobil.App.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,17 +18,17 @@ namespace BusinessMobil.App.ViewModel
         Api api;
         public ListaAsistenciaViewModel(ObservableCollection<ListadoAsistenciaModel> _listadoAsistencias)
         {
-            //api = new Api();
+            api = new Api();
             //IdCompany = 1;
             //Grado = "octavo";
             //Grupo = "A";
             //IdTurno = 1;
             //Task.FromResult(GetListadoAsistenciaAsync());
-            //SelectAsistenciaCommand = new Command(async () => await GetSelectAsistencia());
+            GenerarAsistenciaCommand = new Command(async () => await GenerarAsistencia());
             ListadoAsistencias = _listadoAsistencias;
         }
 
-        public ICommand SelectAsistenciaCommand { get; set; }
+        public ICommand GenerarAsistenciaCommand { get; set; }
 
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
         public ObservableCollection<ListadoAsistenciaModel> ListadoAsistencias
@@ -84,8 +85,12 @@ namespace BusinessMobil.App.ViewModel
         {
             if (SelectItem != null)
             {
-                var asistencia = ListadoAsistencias.FirstOrDefault(f => f.Id == SelectItem.Id);
-                asistencia.SelectAsistencia = true;
+                var tempLista = new ObservableCollection<ListadoAsistenciaModel>();
+                tempLista = ListadoAsistencias;
+                var asistencia = tempLista.FirstOrDefault(f => f.Id == SelectItem.Id);
+                asistencia.Status = true;
+                ListadoAsistencias = null;
+                ListadoAsistencias = tempLista;
             }
         }
         async Task GetListadoAsistenciaAsync()
@@ -126,6 +131,46 @@ namespace BusinessMobil.App.ViewModel
             catch (Exception ex)
             {
 
+            }
+        }
+
+        async Task GenerarAsistencia()
+        {
+            List<ListadoAsistenciaModel> listAsist = new List<ListadoAsistenciaModel>();
+            listAsist =  new List<ListadoAsistenciaModel>
+                    (
+                    ListadoAsistencias.Select(s => new ListadoAsistenciaModel
+                    {
+                        Apellido = s.Apellido,
+                        Company = s.Company,
+                        Date = s.Date,
+                        Dni = s.Dni,
+                        Email = s.Email,
+                        Grado = s.Grado,
+                        Grupo = s.Grupo,
+                        Id = s.Id,
+                        IdCompany = s.IdCompany,
+                        Matricula = s.Matricula,
+                        Nombre = s.Nombre,
+                        Rh = s.Rh,
+                        Status = s.Status,
+                        Turno = s.Turno
+                    })
+                    );
+            try
+            {
+                var result = await api.PostListRespondeAsync("AsistenciaClaseApi/AsistenciaClase", listAsist, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+                if (!result.IsSuccess)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
+                    return;
+                }
+                await Application.Current.MainPage.DisplayAlert("Listado de Asistencia", "Se ha enviado con exito!", "Ok");
+                await App.Navigator.PushAsync(new GenerarListaAsistenciaPage());
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "Ok");
             }
         }
     }
