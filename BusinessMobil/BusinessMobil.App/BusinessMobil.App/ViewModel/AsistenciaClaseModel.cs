@@ -1,12 +1,11 @@
 ﻿using System;
-namespace BusinessMobil.App.Model
-{
-    public class AsistenciaClaseModel
-    {
-        public AsistenciaClaseModel()
-        {
-        }
+using System.Collections.Generic;
+using System.Text;
 
+namespace BusinessMobil.App.ViewModel
+{
+    public class AsistenciaClase
+    {
         public int Id { get; set; }
         public string Dni { get; set; }
         public int IdCompany { get; set; }

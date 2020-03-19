@@ -20,8 +20,8 @@ namespace BusinessMobil.App.ViewModel
             api = new Api();
             EntrarCommand = new Command( async () => await Entrar());
             RegistrarseCommand = new Command(async () => await Navigation.PushAsync(new RegisterPage()));
-            Email = "prueba1@gmail.com";
-            Password = "Pr.123456";
+            //Email = "prueba1@gmail.com";
+            //Password = "Pr.123456";
         }
 
         string email;
@@ -88,9 +88,9 @@ namespace BusinessMobil.App.ViewModel
                 Settings.Status = token.status;
                 Settings.Token = token.access_token;
                 Settings.TypeToken = token.type_token;
-                Settings.DNI = token.dni;
+                Settings.DNI = token.dni.Replace("{ Dni =", "").Replace(" ","").Replace("}","");
                 Settings.User = token.user;
-
+                Settings.Id = token.id;
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 Application.Current.MainPage = new MasterPage();
                 

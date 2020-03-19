@@ -88,14 +88,14 @@ namespace BusinessMobil.App.ViewModel
                 var tempLista = new ObservableCollection<ListadoAsistenciaModel>();
                 tempLista = ListadoAsistencias;
                 var asistencia = tempLista.FirstOrDefault(f => f.Id == SelectItem.Id);
-                asistencia.Status = true;
+                asistencia.Status = asistencia.Status == false ? true : false;
                 ListadoAsistencias = null;
                 ListadoAsistencias = tempLista;
             }
         }
         async Task GetListadoAsistenciaAsync()
         {
-            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken});
+            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
                 return;
@@ -124,7 +124,7 @@ namespace BusinessMobil.App.ViewModel
                         Rh = s.Rh,
                         Status = s.Status,
                         Turno = s.Turno,
-                        ImageSource = f.Base64ToImage(s.Foto)
+                        //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
             }
@@ -136,26 +136,21 @@ namespace BusinessMobil.App.ViewModel
 
         async Task GenerarAsistencia()
         {
-            List<ListadoAsistenciaModel> listAsist = new List<ListadoAsistenciaModel>();
-            listAsist =  new List<ListadoAsistenciaModel>
+            List<AsistenciaClaseModel> listAsist = new List<AsistenciaClaseModel>();
+            listAsist = new List<AsistenciaClaseModel>
                     (
-                    ListadoAsistencias.Select(s => new ListadoAsistenciaModel
-                    {
-                        Apellido = s.Apellido,
-                        Company = s.Company,
-                        Date = s.Date,
-                        Dni = s.Dni,
-                        Email = s.Email,
-                        Grado = s.Grado,
-                        Grupo = s.Grupo,
-                        Id = s.Id,
-                        IdCompany = s.IdCompany,
-                        Matricula = s.Matricula,
-                        Nombre = s.Nombre,
-                        Rh = s.Rh,
-                        Status = s.Status,
-                        Turno = s.Turno
-                    })
+                        ListadoAsistencias.Select(s => new AsistenciaClaseModel
+                        {
+                            Dni = s.Dni,
+                            EmailSend = s.Email,
+                            Id = s.Id,
+                            IdCompany = s.IdCompany,
+                            Status = s.Status,
+                            Turno = s.Turno,
+                            DniAdm = Settings.Id,
+                            Materia = s.Materia,
+                            CreateDate = DateTime.Now
+                        })
                     );
             try
             {

@@ -1,4 +1,5 @@
-﻿using BusinessMobil.App.Model;
+﻿using BusinessMobil.App.Helpers;
+using BusinessMobil.App.Model;
 using BusinessMobil.App.Views;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,27 @@ namespace BusinessMobil.App.ViewModel
         public MenuViewModel()
         {
             LoadMenus();
+            User = Settings.User;
+            EmailUser = Settings.Email;
         }
+
+        private string user;
+
+        public string User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+
+        private string emailUser;
+        public string EmailUser
+        {
+            get { return emailUser; }
+            set { emailUser = value; }
+        }
+
+
 
         ObservableCollection<MenuModel> listaMenu;
         public ObservableCollection<MenuModel> ListaMenu

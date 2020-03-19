@@ -46,7 +46,7 @@
                            HeightRequest="80" Margin="12,0"/>
                     <Label Grid.Column="1"
                            Grid.Row="0"
-                           Text="Willians J Melendez O"
+                           Text="{Binding User}"
                            FontSize="22"
                            TextColor="Black"/>
 

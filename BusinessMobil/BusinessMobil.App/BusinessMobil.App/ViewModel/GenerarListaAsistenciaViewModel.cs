@@ -37,12 +37,12 @@ namespace BusinessMobil.App.ViewModel
         public ICommand GenerarListaAsistenciaCommand
         {
             get
-            {               
+            {
                 return new Command(GenerarLista);
             }
         }
 
-        
+
 
         ObservableCollection<string> grupos;
         public ObservableCollection<string> Grupos
@@ -108,7 +108,7 @@ namespace BusinessMobil.App.ViewModel
         {
             //await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
             //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
-            
+
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
             await Task.Delay(100);
 
@@ -143,10 +143,11 @@ namespace BusinessMobil.App.ViewModel
                         Nombre = s.Nombre,
                         Rh = s.Rh,
                         Status = s.Status,
-                        Turno = s.Turno, 
-                        Identificador = s.Identificador, 
+                        Turno = s.Turno,
+                        Identificador = s.Identificador,
                         Foto = s.Foto,
-                        ImageSource = f.Base64ToImage(s.Foto)
+                        Materia = "Matematica"//s.Materia,
+                        //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
 
