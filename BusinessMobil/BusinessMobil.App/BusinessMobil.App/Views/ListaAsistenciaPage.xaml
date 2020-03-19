@@ -20,7 +20,8 @@
                                 </Grid.GestureRecognizers>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
 
@@ -41,14 +42,19 @@
 
                                 <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
                                     <Label Text="{Binding Nombre}"
-                                       FontSize="15" TextColor="Black"
+                                       FontSize="12" TextColor="Black"
                                        HorizontalOptions="FillAndExpand"/>
 
                                     <Label Text="{Binding Apellido}"
-                                       FontSize="15" TextColor="Black"
+                                       FontSize="12" TextColor="Black"
                                      HorizontalOptions="FillAndExpand"/>
                                 </StackLayout>
-                                <CheckBox Grid.Column="2" IsChecked="{Binding Status}"/>
+                                <StackLayout Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
+                                    <Label Text="{Binding Dni}"
+                                       FontSize="12" TextColor="Black"
+                                       HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <CheckBox Grid.Column="3" IsChecked="{Binding Status}"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

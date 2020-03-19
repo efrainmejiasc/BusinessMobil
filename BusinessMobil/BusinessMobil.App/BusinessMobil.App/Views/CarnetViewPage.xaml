@@ -3,46 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusinessMobil.App.Views.CarnetViewPage">
     <ContentPage.Content>
-        <ScrollView>
+        <!--<ScrollView>
             <Grid Style="{StaticResource MargenContentPage}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="150"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <BoxView Grid.Row="0"/>
-                    <StackLayout Grid.Row="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50*"/>
-                                <ColumnDefinition Width="50*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="240"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Column="0" Source="FotoCarnet.png" Aspect="AspectFit"/>
-                            <Image Grid.Column="1" Source="qr" Aspect="AspectFit"/>
-                        </Grid>
-                    </StackLayout>
-                    <StackLayout Grid.Row="2">
-                        <Label Text="Willians J" FontAttributes="Italic" TextColor="Black" FontSize="40"/>
-                        <Label Text="Melendez O" FontAttributes="Italic" TextColor="Black" FontSize="30"/>
-                        <Label Text="D.I: 1234567890" FontAttributes="Italic" TextColor="Black" FontSize="20"/>
-                        <Label Text="RH: O+" TextColor="Black" FontAttributes="Italic" FontSize="20"/>
-                        <Label Text="Grado: Septimo" HorizontalOptions="End" FontAttributes="Bold" TextColor="Black" FontSize="20"/>
-                    </StackLayout>
-                </Grid>
+                <Image Grid.Row="0"
+                       Source="V1112132427.jpg" Aspect="AspectFit"/>
                 <StackLayout Grid.Row="1">
                     <Label Text="Observaciones"/>
                     <Editor/>
                 </StackLayout>
             </Grid>
 
-        </ScrollView>
+        </ScrollView>-->
+        <Grid>
+            <Image Grid.Row="0"
+                       Source="{Binding Carnet}" Aspect="AspectFit"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -70,23 +70,24 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid Margin="10">
-
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
                                 </Grid.GestureRecognizers>
 
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="1"
+                                <Label Grid.Column="1" Grid.Row="0"
                                        FontAttributes="None"
-                                       FontSize="14"
+                                       FontSize="12"
                                        VerticalOptions="Center"
                                        TextColor="Black"
                                        Text="{Binding Title}"/>
-
                                 </Grid>
                         </ViewCell>
                     </DataTemplate>

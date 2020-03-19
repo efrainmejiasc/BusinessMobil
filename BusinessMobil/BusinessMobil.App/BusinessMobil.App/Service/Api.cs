@@ -14,6 +14,7 @@ namespace BusinessMobil.App.Service
 {
     public class Api
     {
+        //http://joselelu-001-site2.etempurl.com/digitalcard/
         private string urlBase = "http://joselelu-001-site2.etempurl.com/api";
         public Api()
         {

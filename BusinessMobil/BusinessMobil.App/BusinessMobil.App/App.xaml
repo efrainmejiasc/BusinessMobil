@@ -19,12 +19,6 @@
             <Setter Property="FontSize" Value="Caption" />
         </Style>
 
-        <Style TargetType="Label">
-            <Setter Property="TextColor" Value="#5ED907" />
-            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-            <Setter Property="FontSize" Value="Medium" />
-        </Style>
-
         <Style TargetType="ContentPage">
             <Setter Property="BackgroundColor" Value="#FFFFFF"/>
         </Style>
@@ -35,7 +29,7 @@
         </Style>
 
         <Style TargetType="StackLayout" x:Key="MargenButton">
-            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Margin" Value="0,2.5,0,2.5"/>
         </Style>
 
         <Style TargetType="Grid" x:Key="MargenContentPage">
@@ -43,19 +37,27 @@
             <Setter Property="BackgroundColor" Value="#FFFFFF"/>
         </Style>
 
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="#F4F4F4" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
             <Setter Property="MinimumWidthRequest" Value="500" />
             <Setter Property="TextColor" Value="#19200F" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="FontSize" Value="14" />
         </Style>
 
         <Style TargetType="Button">
             <Setter Property="BackgroundColor" Value="#085CA6"/>
             <Setter Property="TextColor" Value="#FFFFFF"/>
-            <Setter Property="HeightRequest" Value="54"/>
+            <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="FontSize" Value="Small"/>
         </Style>
     </Application.Resources>
 </Application>
