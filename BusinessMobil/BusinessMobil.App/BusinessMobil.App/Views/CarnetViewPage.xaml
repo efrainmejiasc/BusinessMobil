@@ -18,7 +18,9 @@
             </Grid>
 
         </ScrollView>-->
+        
         <Grid>
+            <ActivityIndicator IsRunning="{ Binding IsRunning}"/>
             <Image Grid.Row="0"
                        Source="{Binding Carnet}" Aspect="AspectFit"/>
         </Grid>

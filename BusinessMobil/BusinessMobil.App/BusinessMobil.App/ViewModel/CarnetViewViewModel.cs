@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using BusinessMobil.App.Controls.Interface;
+using Xamarin.Forms;
+
 namespace BusinessMobil.App.ViewModel
 {
     public class CarnetViewViewModel : BaseViewModel
@@ -7,11 +12,19 @@ namespace BusinessMobil.App.ViewModel
 
         public CarnetViewViewModel(string carnet)
         {
-            Carnet = carnet;
+            IsRunning = true;
+            Uri uri = new Uri($"{ ruta }{ carnet}.jpg");
+            Carnet = new UriImageSource
+            {
+                Uri = uri,
+                CachingEnabled = false
+            };
+            Thread.Sleep(4000);
+            IsRunning = false;
         }
 
-        private string _carnet;
-        public string Carnet
+        private ImageSource _carnet;
+        public ImageSource Carnet
         {
             get => _carnet;
             set => SetValue(ref _carnet, value);
