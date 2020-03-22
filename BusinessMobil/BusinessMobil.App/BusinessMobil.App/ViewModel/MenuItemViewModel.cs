@@ -29,8 +29,8 @@ namespace BusinessMobil.App.ViewModel
             switch (PageName)
             {
                 case "ScannerPage":
-                    //await App.Navigator.PushAsync(new ScannerPage());
-                    await ScanCode();
+                    await App.Navigator.PushAsync(new MenuScanerPage());
+                    //await ScanCode();
                     break;
                 case "RegisterDevicePage":
                     await App.Navigator.PushAsync(new RegisterDevicePage());
@@ -74,11 +74,11 @@ namespace BusinessMobil.App.ViewModel
             {
                 page.IsScanning = false;
 
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    string[] array = f.base64Decode(result.Text).Split('#');
-                    await App.Navigator.PushAsync(new CarnetViewPage(array[2]));
-                });     
+                //Device.BeginInvokeOnMainThread(async () =>
+                //{
+                //    string[] array = f.base64Decode(result.Text).Split('#');
+                //    await App.Navigator.PushAsync(new CarnetViewPage(array[2]));
+                //});     
             };
         }
     }

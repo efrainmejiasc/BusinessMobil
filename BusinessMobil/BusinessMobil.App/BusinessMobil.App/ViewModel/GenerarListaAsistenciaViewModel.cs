@@ -19,20 +19,12 @@ namespace BusinessMobil.App.ViewModel
         public GenerarListaAsistenciaViewModel()
         {
             IdCompany = 1;
-            Grado = "octavo";
-            Grupo = "A";
-            IdTurno = 1;
+            //Grado = "octavo";
+            //Grupo = "A";
+            //IdTurno = 1;
+            LlenarPiker();
             IsRunning = false;
             IsEnable = true;
-
-            Grupos = new ObservableCollection<string>();
-            Grados = new ObservableCollection<string>();
-            Turnos = new ObservableCollection<string>();
-
-            Grupos.Add("A");
-            Grados.Add("Octavo");
-            Turnos.Add("Mañana");
-
         }
         public ICommand GenerarListaAsistenciaCommand
         {
@@ -42,27 +34,46 @@ namespace BusinessMobil.App.ViewModel
             }
         }
 
+        ObservableCollection<TurnoModel> turnos;
+        public ObservableCollection<TurnoModel> Turnos
+        {
+            get => turnos;
+            set => SetValue(ref turnos, value);
+        }
 
+        TurnoModel selectTurnos;
+        public TurnoModel SelectTurnos
+        {
+            get=> selectTurnos;
+            set=> SetValue(ref selectTurnos,value);
+        }
 
-        ObservableCollection<string> grupos;
-        public ObservableCollection<string> Grupos
+        ObservableCollection<GruposModel> grupos;
+        public ObservableCollection<GruposModel> Grupos
         {
             get => grupos;
             set => SetValue(ref grupos, value);
         }
 
-        ObservableCollection<string> grados;
-        public ObservableCollection<string> Grados
+        GruposModel selectGrupos;
+        public GruposModel SelectGrupos
+        {
+            get => selectGrupos;
+            set => SetValue(ref selectGrupos, value);
+        }
+
+        GradosModel selectgrados;
+        public GradosModel SelectGrados
+        {
+            get => selectgrados;
+            set => SetValue(ref selectgrados, value);
+        }
+
+        ObservableCollection<GradosModel> grados;
+        public ObservableCollection<GradosModel> Grados
         {
             get => grados;
             set => SetValue(ref grados, value);
-        }
-
-        ObservableCollection<string> turnos;
-        public ObservableCollection<string> Turnos
-        {
-            get => turnos;
-            set => SetValue(ref turnos, value);
         }
 
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
@@ -83,20 +94,6 @@ namespace BusinessMobil.App.ViewModel
             set { idCompany = value; }
         }
 
-        private string grado;
-        public string Grado
-        {
-            get { return grado; }
-            set { grado = value; }
-        }
-
-        private string grupo;
-        public string Grupo
-        {
-            get { return grupo; }
-            set { grupo = value; }
-        }
-
         private int idTurno;
         public int IdTurno
         {
@@ -114,10 +111,10 @@ namespace BusinessMobil.App.ViewModel
 
             IsRunning = true;
             IsEnable = false;
-            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={Grado}&grupo={Grupo}&idTurno={IdTurno}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
-                IsRunning = false;
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 IsEnable = true;
                 return;
             }
@@ -151,6 +148,14 @@ namespace BusinessMobil.App.ViewModel
                     })
                     );
 
+                if(ListadoAsistencias.Count() == 0)
+                {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                    IsEnable = true;
+                    await Application.Current.MainPage.DisplayAlert("Lista", "No existe ninguna lista de alumnos.", "Ok");
+                    return;
+                }
+
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await App.Navigator.PushAsync(new ListaAsistenciaPage(listadoAsistencias));
                 IsRunning = false;
@@ -161,6 +166,34 @@ namespace BusinessMobil.App.ViewModel
                 IsRunning = false;
                 IsEnable = true;
             }
+        }
+
+        async void LlenarPiker()
+        {
+            var result = await api.GetListRespondeAsync<GruposModel>("PersonApi/GetGrupos");
+            if (!result.IsSuccess)
+            {
+                return;
+            }
+
+            Grupos = result.Result as ObservableCollection<GruposModel>;
+
+            result = await api.GetListRespondeAsync<GradosModel>("PersonApi/GetGrados");
+            if (!result.IsSuccess)
+            {
+                return;
+            }
+
+            Grados = result.Result as ObservableCollection<GradosModel>;
+
+            Turnos = new ObservableCollection<TurnoModel>()
+            {
+                new TurnoModel()
+                {
+                    Id = 1,
+                    NombreTurno = "Mañana"
+                }
+            };
         }
     }
 }

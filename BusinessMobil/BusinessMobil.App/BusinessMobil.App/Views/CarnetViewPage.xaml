@@ -2,27 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusinessMobil.App.Views.CarnetViewPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Enviar" Command="{Binding EnviarCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <!--<ScrollView>
-            <Grid Style="{StaticResource MargenContentPage}">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="0"
-                       Source="V1112132427.jpg" Aspect="AspectFit"/>
-                <StackLayout Grid.Row="1">
-                    <Label Text="Observaciones"/>
-                    <Editor/>
-                </StackLayout>
-            </Grid>
-
-        </ScrollView>-->
-        
         <Grid>
-            <ActivityIndicator IsRunning="{ Binding IsRunning}"/>
-            <Image Grid.Row="0"
-                       Source="{Binding Carnet}" Aspect="AspectFit"/>
+            <Image Grid.Row="0" Source="{Binding Carnet}" Aspect="AspectFit"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

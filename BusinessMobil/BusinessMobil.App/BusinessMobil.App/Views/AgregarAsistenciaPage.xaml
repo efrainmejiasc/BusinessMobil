@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
-             Title="Generar Lista de Asistencia"
-             x:Class="BusinessMobil.App.Views.GenerarListaAsistenciaPage">
+             xmlns:viewModel = "clr-namespace:BusinessMobil.App.ViewModel"
+             x:Class="BusinessMobil.App.Views.AgregarAsistenciaPage">
 
     <ContentPage.BindingContext>
-        <viewModel:GenerarListaAsistenciaViewModel/>
+        <viewModel:AgregarAsistenciaViewModel/>
     </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <ScrollView>
             <Grid Style="{StaticResource MargenContentPage}">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -30,8 +29,12 @@
                     <Label Text="Turno"></Label>
                     <Picker ItemsSource="{Binding Turnos}" SelectedItem="{Binding SelectTurnos}" ItemDisplayBinding="{Binding NombreTurno}"/>
                 </StackLayout>
-            <StackLayout Grid.Row="3" Style="{StaticResource MargenButton}">
-                <Button Command="{Binding GenerarListaAsistenciaCommand}" Text="Generar Lista de Asistencia" IsEnabled="{Binding IsEnable}"/>
+                <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
+                    <Label Text="Observación"/>
+                    <Editor Text="{Binding Observacion}" HeightRequest="100"/>
+                </StackLayout>
+            <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
+                <Button Command="{Binding ScanearCodigoCommand}" Text="Generar Lista de Asistencia" IsEnabled="{Binding IsEnable}"/>
             </StackLayout>
             </Grid>
         </ScrollView>
