@@ -54,6 +54,16 @@ namespace BusinessMobil.App.ViewModel
         async Task EnviarAsistencia()
         {
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            var obs = new ObservasionClaseModel()
+            {
+                Dni = DatosScaner.Dni,
+                IdCompany = DatosScaner.IdCompany,
+                Status = true,
+                CreateDate = DateTime.Now,
+                DniAdm = DatosScaner.DniAdm,
+                Observacion = DatosScaner.Observacion,
+                Materia = DatosScaner.Materia.Materia,
+            };
             var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", DatosScaner, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if(!result.IsSuccess)
             {

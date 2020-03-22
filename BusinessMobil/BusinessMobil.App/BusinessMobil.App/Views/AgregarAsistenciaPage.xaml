@@ -16,6 +16,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0" Margin="0,30,0,0">
                     <Label Text="Grado"></Label>
@@ -26,15 +27,19 @@
                     <Picker ItemsSource="{Binding Grupos}" SelectedItem="{Binding SelectGrupos}" ItemDisplayBinding="{Binding NombreGrupo}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Style="{StaticResource MargenControl}">
+                    <Label Text="Materia"></Label>
+                    <Picker ItemsSource="{Binding Materia}" SelectedItem="{Binding SelectMateria}" ItemDisplayBinding="{Binding Materia}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
                     <Label Text="Turno"></Label>
                     <Picker ItemsSource="{Binding Turnos}" SelectedItem="{Binding SelectTurnos}" ItemDisplayBinding="{Binding NombreTurno}"/>
                 </StackLayout>
-                <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
+                <StackLayout Grid.Row="4" Style="{StaticResource MargenControl}">
                     <Label Text="Observación"/>
                     <Editor Text="{Binding Observacion}" HeightRequest="100"/>
                 </StackLayout>
-            <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
-                <Button Command="{Binding ScanearCodigoCommand}" Text="Generar Lista de Asistencia" IsEnabled="{Binding IsEnable}"/>
+            <StackLayout Grid.Row="5" Style="{StaticResource MargenButton}">
+                <Button Command="{Binding ScanearCodigoCommand}" Text="Escanear Codigo QR" IsEnabled="{Binding IsEnable}"/>
             </StackLayout>
             </Grid>
         </ScrollView>

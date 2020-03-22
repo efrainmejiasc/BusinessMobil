@@ -23,7 +23,6 @@ namespace BusinessMobil.App.ViewModel
             //Grupo = "A";
             //IdTurno = 1;
             LlenarPiker();
-            IsRunning = false;
             IsEnable = true;
         }
         public ICommand GenerarListaAsistenciaCommand
@@ -46,6 +45,20 @@ namespace BusinessMobil.App.ViewModel
         {
             get=> selectTurnos;
             set=> SetValue(ref selectTurnos,value);
+        }
+
+        ObservableCollection<MateriaClaseModel> materia;
+        public ObservableCollection<MateriaClaseModel> Materia
+        {
+            get => materia;
+            set => SetValue(ref materia, value);
+        }
+
+        MateriaClaseModel selectMateria;
+        public MateriaClaseModel SelectMateria
+        {
+            get => selectMateria;
+            set => SetValue(ref selectMateria, value);
         }
 
         ObservableCollection<GruposModel> grupos;
@@ -103,14 +116,34 @@ namespace BusinessMobil.App.ViewModel
 
         async void GenerarLista()
         {
-            //await Application.Current.MainPage.DisplayAlert("", "Prueba", "Ok");
-            //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            if (SelectGrados == null)
+            {
+                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grado!", "Ok");
+                return;
+            }
+
+            if (SelectGrupos == null)
+            {
+                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grupo!", "Ok");
+                return;
+            }
+
+            if (SelectMateria == null)
+            {
+                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar la Materia!", "Ok");
+                return;
+            }
+
+            if (SelectTurnos == null)
+            {
+                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Turno!", "Ok");
+                return;
+            }
 
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
             await Task.Delay(100);
-
-            IsRunning = true;
             IsEnable = false;
+
             var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
@@ -192,6 +225,25 @@ namespace BusinessMobil.App.ViewModel
                 {
                     Id = 1,
                     NombreTurno = "Mañana"
+                }
+            };
+
+            Materia = new ObservableCollection<MateriaClaseModel>()
+            {
+                new MateriaClaseModel
+                {
+                    Id = 1,
+                    Materia = "Matematica"
+                },
+                new MateriaClaseModel
+                {
+                    Id = 2,
+                    Materia = "Castellano"
+                },
+                new MateriaClaseModel
+                {
+                    Id = 3,
+                    Materia = "Ingles"
                 }
             };
         }
