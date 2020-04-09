@@ -155,7 +155,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\logo.JPG" />
     <AndroidResource Include="Resources\user.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -163,5 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\LOGOHORIZONTAL.png" />
   </ItemGroup>
 </Project>

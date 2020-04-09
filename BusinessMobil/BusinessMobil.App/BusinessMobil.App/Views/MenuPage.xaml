@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              mc:Ignorable="d"
              Title="Menu"
              x:Class="BusinessMobil.App.Views.MenuPage">
@@ -13,64 +14,25 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Grid RowSpacing="0">
-
+        <Grid BackgroundColor="#F2F2F2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="250"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <!--<BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>-->
-                <Grid Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="120"
-                      VerticalOptions="End" Margin="12,48">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Image Grid.Column="0"
-                           Grid.Row="0"
-                           Grid.RowSpan="2"
-                           Source="user"
-                           Aspect="AspectFit"
-                           HeightRequest="80"
-                           Margin="12,0"/>
-
-                    <Label Grid.Column="1"
-                           Grid.Row="0"
-                           Text="{Binding User}"
-                           FontSize="22"
-                           TextColor="Black"/>
-
-                    <Label Grid.Column="1"
-                           Grid.Row="1"
-                           Text="Usuario"
-                           TextColor="Black"
-                           FontSize="15"/>
-                </Grid>
+            <Grid BackgroundColor="#194973">
+                <!--<Image Source="bg.png" Aspect="AspectFill" />-->
+                <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="https://frutosdelande.com/wp-content/uploads/2020/03/1N.gif" Aspect="AspectFill" WidthRequest="85" HeightRequest="85" />
+                    <Label Text="{Binding User}" TextColor="#F2F2F2" FontSize="Large" />
+                </StackLayout>
             </Grid>
-            <Grid Grid.Row="1" Grid.RowSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <!--<BoxView Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Fill" WidthRequest="1" BackgroundColor="#5ED907"/>-->
+            <StackLayout Margin="20,20,20,0" Grid.Row="1" Spacing="15">
                 <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True"
                           SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}"
                           Margin="0,40,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                            <ImageCell Text="{Binding Title}" ImageSource="{Binding Icon}" Detail="{Binding MenuDetail}" DetailColor="Black" Command="{Binding SelectMenuCommand}" Height="25"/>
+                            <ImageCell Text="{Binding Title}" ImageSource="{Binding Icon}" Detail="{Binding MenuDetail}" DetailColor="Black" Command="{Binding SelectMenuCommand}" Height="35"/>
                             <!--<ViewCell>
                             
                             <Grid Margin="10">
@@ -97,7 +59,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            </Grid>
+            </StackLayout>
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
