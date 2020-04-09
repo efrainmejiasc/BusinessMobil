@@ -8,6 +8,8 @@ using Plugin.DeviceInfo;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using BusinessMobil.App.Model;
+using BusinessMobil.App.Views;
+using BusinessMobil.App.Controls.Interface;
 
 namespace BusinessMobil.App.ViewModel
 {
@@ -71,6 +73,17 @@ namespace BusinessMobil.App.ViewModel
             }
         }
 
+        string nombreCompleto;
+        public string NombreCompleto
+        {
+            get => nombreCompleto;
+            set
+            {
+                nombreCompleto = value;
+                OnPropertyChanged();
+            }
+        }
+
         double? dni;
         public double? Dni
         {
@@ -101,22 +114,26 @@ namespace BusinessMobil.App.ViewModel
                 return;
             }
 
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
             var register = new RegisterDeviceModel()
             {
                 Codigo = Codigo,
                 User = User,
                 Email = Email,
                 Phone = Phone,
-                Dni = Dni.Value
+                Dni = Dni.Value.ToString()
             };
+
             var result = await api.PostRespondeAsync("DeviceApi/RegisterDevice", register,new Token() { access_token =  Settings.Token, type_token = Settings.TypeToken});
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
                 return;
             }
+            DependencyService.Get<ILodingPageService>().HideLoadingPage();
             await Application.Current.MainPage.DisplayAlert("Registro de Dispositivo", "Se ha registrado con exito!","Ok");
-            await App.Navigator.PushAsync(new MainPage());
+            Application.Current.MainPage = new MasterPage();
         }
     }
 }
