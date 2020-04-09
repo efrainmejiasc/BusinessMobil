@@ -15,5 +15,6 @@ namespace BusinessMobil.App.Model
         public string Dni { get; set; }
         public string DniAdm { get; set; }
         public string Observacion { get; set; }
+        public string Base64Dni { get; set; }
     }
 }

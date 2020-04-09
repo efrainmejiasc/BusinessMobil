@@ -1,4 +1,5 @@
-﻿using BusinessMobil.App.Helpers;
+﻿using BusinessMobil.App.Controls.Interface;
+using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
 using BusinessMobil.App.Views;
@@ -136,6 +137,7 @@ namespace BusinessMobil.App.ViewModel
 
         async Task GenerarAsistencia()
         {
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
             List<AsistenciaClaseModel> listAsist = new List<AsistenciaClaseModel>();
             listAsist = new List<AsistenciaClaseModel>
                     (
@@ -157,14 +159,18 @@ namespace BusinessMobil.App.ViewModel
                 var result = await api.PostListRespondeAsync("AsistenciaClaseApi/AsistenciaClase", listAsist, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
                 if (!result.IsSuccess)
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
                     return;
                 }
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await Application.Current.MainPage.DisplayAlert("Listado de Asistencia", "Se ha enviado con exito!", "Ok");
-                await App.Navigator.PushAsync(new GenerarListaAsistenciaPage());
+                //await App.Navigator.PushAsync(new HomePage());
+                Application.Current.MainPage = new MasterPage();
             }
             catch (Exception ex)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await Application.Current.MainPage.DisplayAlert("Error!", ex.Message, "Ok");
             }
         }

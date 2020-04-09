@@ -2,12 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BusinessMobil.App.Views.CarnetViewPage">
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="Enviar" Command="{Binding EnviarCommand}"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
-        <Grid>
-            <Image Grid.Row="0" Source="{Binding Carnet}" Aspect="AspectFit"/>
-        </Grid>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="{Binding Carnet}" Aspect="AspectFit"/>
+                <StackLayout Grid.Row="1" Style="{StaticResource MargenButton}">
+                    <Button Text="Agregar Asistencia" Command="{Binding AgregarAsistenciaCommand}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

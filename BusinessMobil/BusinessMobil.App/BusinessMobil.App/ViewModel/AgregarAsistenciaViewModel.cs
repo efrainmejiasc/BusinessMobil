@@ -20,17 +20,26 @@ namespace BusinessMobil.App.ViewModel
     {
         Api api;
         Funciones.Funciones f;
-        public AgregarAsistenciaViewModel()
+        public AgregarAsistenciaViewModel(DatosScanerModel datos)
         {
             api = new Api();
             f = new Funciones.Funciones();
             IdCompany = 1;
-            Task.FromResult(LlenarPiker());
+            DatosScaner = datos;
+            //Task.Run(async () =>
+            //{
+            //    await LlenarPiker();
+            //    await GetDatosAlumno();
+            //});
+            LlenarPiker();
+            GetDatosAlumno();
             IsEnable = true;
         }
 
-        public ICommand ScanearCodigoCommand => new Command(async () => await ScanCode());
+        //public ICommand ScanearCodigoCommand => new Command(async () => await ScanCode());
+        public ICommand EnviarCommand => new Command(async () => await EnviarAsistencia());
 
+        #region Propiedades
         private int idCompany;
         public int IdCompany
         {
@@ -104,16 +113,62 @@ namespace BusinessMobil.App.ViewModel
         private string observacion;
         public string Observacion
         {
-            get=> observacion;
-            set=> SetValue(ref observacion,value);
+            get => observacion;
+            set => SetValue(ref observacion, value);
         }
 
         ObservableCollection<ListadoAsistenciaModel> listadoAsistencias;
         public ObservableCollection<ListadoAsistenciaModel> ListadoAsistencias
         {
             get => listadoAsistencias;
-            private set => SetValue(ref listadoAsistencias,value);
+            private set => SetValue(ref listadoAsistencias, value);
         }
+
+        private DatosScanerModel datosScaner;
+        public DatosScanerModel DatosScaner
+        {
+            get => datosScaner;
+            set => SetValue(ref datosScaner, value);
+        }
+
+        private string _Grado;
+        public string Grado
+        {
+            get { return _Grado; }
+            set => SetValue(ref _Grado,value);
+        }
+
+        private string _Grupo;
+        public string Grupo
+        {
+            get { return _Grupo; }
+            set => SetValue(ref _Grupo, value);
+        }
+
+        private string _Turno;
+        public string Turno
+        {
+            get { return _Turno; }
+            set => SetValue(ref _Turno,value);
+        }
+
+        private ListadoAsistenciaModel _alumno;
+        public ListadoAsistenciaModel Alumno
+        {
+            get { return _alumno; }
+            set => SetValue(ref _alumno, value);
+        }
+
+        private int _IdAsistencia;
+
+        public int IdAsistencia
+        {
+            get { return _IdAsistencia; }
+            set => SetValue(ref _IdAsistencia, value);
+        }
+
+
+        #endregion
 
         async Task LlenarPiker()
         {
@@ -164,20 +219,200 @@ namespace BusinessMobil.App.ViewModel
 
             DependencyService.Get<ILodingPageService>().HideLoadingPage();
         }
-        async Task ScanCode()
+        //async Task ScanCode()
+        //{
+
+        //    if (SelectGrados == null)
+        //    {
+        //        await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grado!", "Ok");
+        //        return;
+        //    }
+
+        //    if (SelectGrupos == null)
+        //    {
+        //        await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grupo!", "Ok");
+        //        return;
+        //    }
+
+        //    if (SelectMateria == null)
+        //    {
+        //        await App.Navigator.DisplayAlert("Validación", "Debe seleccionar la Materia!", "Ok");
+        //        return;
+        //    }
+
+        //    if (SelectTurnos == null)
+        //    {
+        //        await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Turno!", "Ok");
+        //        return;
+        //    }
+
+        //    if (string.IsNullOrEmpty(Observacion))
+        //    {
+        //        await App.Navigator.DisplayAlert("Validación", "Debe introducir la Observación!", "Ok");
+        //        return;
+        //    }
+
+        //    var options = new MobileBarcodeScanningOptions();
+
+        //    options.PossibleFormats = new List<BarcodeFormat>()
+        //    {
+        //        ZXing.BarcodeFormat.EAN_8,
+        //        ZXing.BarcodeFormat.EAN_13,
+        //        ZXing.BarcodeFormat.AZTEC,
+        //        ZXing.BarcodeFormat.QR_CODE
+        //    };
+
+        //    var overlay = new ZXingDefaultOverlay
+        //    {
+        //        ShowFlashButton = false,
+        //        TopText = "Coloca el código QR frente al dispositivo",
+        //        BottomText = "El escaneo es automático",
+        //        Opacity = 0.75
+        //    };
+        //    overlay.BindingContext = overlay;
+
+        //    var page = new ZXingScannerPage(options, overlay)
+        //    {
+        //        Title = "Escanear QR",
+        //        DefaultOverlayShowFlashButton = true,
+        //    };
+        //    await App.Navigator.PushAsync(page);
+
+        //    page.OnScanResult += (result) =>
+        //    {
+        //        page.IsScanning = false;
+
+        //        Device.BeginInvokeOnMainThread(async () =>
+        //        {
+        //            await GetExisteAlumno();
+        //            string[] array = f.base64Decode(result.Text).Split('#');
+        //            var dni = array[2];
+        //            IsEnable = true;
+        //            var exist = ListadoAsistencias.Any(a => a.Dni == dni);
+        //            if (!ListadoAsistencias.Any(a => a.Dni == dni))
+        //            {
+        //                await App.Navigator.DisplayAlert("Alerta", $"Este estudiante en el Grado: {SelectGrados.NombreGrado}, Grupo: {SelectGrupos.NombreGrupo}, Materia: {SelectMateria.Materia}, Turno: {SelectTurnos.NombreTurno} !", "Ok");
+        //                await App.Navigator.PushAsync(new HomePage());
+        //                return;
+        //            }
+
+        //            await App.Navigator.PushAsync(new CarnetViewPage(new DatosScanerModel()
+        //            {
+        //                IdCompany = 1,
+        //                Dni = array[2],
+        //                DniAdm = Settings.DNI,
+        //                Turno = SelectTurnos,
+        //                Grado = SelectGrados,
+        //                Grupo = SelectGrupos,
+        //                Materia = SelectMateria,
+        //                Observacion = Observacion
+        //            }));
+        //        });
+        //    };
+        //}
+        async Task GetDatosAlumno()
         {
-
-            if(SelectGrados == null)
+            try
             {
-                await App.Navigator.DisplayAlert("Validación","Debe seleccionar el Grado!","Ok");
-                return;
-            }
+                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                var result = await api.GetrespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPerson?identificador={DatosScaner.Base64Dni}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+                if (!result.IsSuccess)
+                {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                    IsEnable = true;
+                    return;
+                }
 
-            if (SelectGrupos == null)
-            {
-                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grupo!", "Ok");
-                return;
+                Alumno = result.Result as ListadoAsistenciaModel;
+
+                Turno = Turnos.FirstOrDefault(f => f.Id == Alumno.Turno).NombreTurno;
+                Grupo = Alumno.Grupo;
+                Grado = Alumno.Grado;
+
+                result = await api.GetListRespondeAsync<AsistenciaModel>($"AsistenciaClaseApi/GetAsistenciaClase?fecha={DateTime.Now.Date}&grado={Grado}&grupo={Grupo}&idCompany={IdCompany}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+                if (!result.IsSuccess)
+                {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                    IsEnable = true;
+                    return;
+                }
+                var list = result.Result as ObservableCollection<AsistenciaModel>;
+                IdAsistencia = list.FirstOrDefault(f=> f.Dni == Alumno.Dni).Id;
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
             }
+            catch (Exception ex)
+            {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
+            }
+        }
+        //async Task GetExisteAlumno()
+        //{
+        //    var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+        //    if (!result.IsSuccess)
+        //    {
+        //        DependencyService.Get<ILodingPageService>().HideLoadingPage();
+        //        IsEnable = true;
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        Funciones.Funciones f = new Funciones.Funciones();
+        //        var listAsistencia = result.Result as ObservableCollection<ListadoAsistenciaModel>;
+
+        //        if (listAsistencia.Count == 0)
+        //        {
+        //            DependencyService.Get<ILodingPageService>().HideLoadingPage();
+        //            IsEnable = true;
+        //            await Application.Current.MainPage.DisplayAlert("Lista", "No existe ninguna lista de alumnos.", "Ok");
+        //            return;
+        //        }
+
+        //        ListadoAsistencias = new ObservableCollection<ListadoAsistenciaModel>
+        //            (
+        //            listAsistencia.Select(s => new ListadoAsistenciaModel
+        //            {
+        //                Apellido = s.Apellido,
+        //                Company = s.Company,
+        //                Date = s.Date,
+        //                Dni = s.Dni,
+        //                Email = s.Email,
+        //                Grado = s.Grado,
+        //                Grupo = s.Grupo,
+        //                Id = s.Id,
+        //                IdCompany = s.IdCompany,
+        //                Matricula = s.Matricula,
+        //                Nombre = s.Nombre,
+        //                Rh = s.Rh,
+        //                Status = s.Status,
+        //                Turno = s.Turno,
+        //                Identificador = s.Identificador,
+        //                Foto = s.Foto,
+        //                Materia = "Matematica"//s.Materia,
+        //                //ImageSource = f.Base64ToImage(s.Foto)
+        //            })
+        //            );
+
+        //        //DependencyService.Get<ILodingPageService>().HideLoadingPage();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        IsEnable = true;
+        //    }
+        //}
+        async Task EnviarAsistencia()
+        {
+            //if (SelectGrados == null)
+            //{
+            //    await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grado!", "Ok");
+            //    return;
+            //}
+
+            //if (SelectGrupos == null)
+            //{
+            //    await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Grupo!", "Ok");
+            //    return;
+            //}
 
             if (SelectMateria == null)
             {
@@ -185,131 +420,42 @@ namespace BusinessMobil.App.ViewModel
                 return;
             }
 
-            if (SelectTurnos == null)
-            {
-                await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Turno!", "Ok");
-                return;
-            }
+            //if (SelectTurnos == null)
+            //{
+            //    await App.Navigator.DisplayAlert("Validación", "Debe seleccionar el Turno!", "Ok");
+            //    return;
+            //}
 
-            if(string.IsNullOrEmpty(Observacion))
+            if (string.IsNullOrEmpty(Observacion))
             {
                 await App.Navigator.DisplayAlert("Validación", "Debe introducir la Observación!", "Ok");
                 return;
             }
 
-            var options = new MobileBarcodeScanningOptions();
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
 
-            options.PossibleFormats = new List<BarcodeFormat>()
+            var obs = new ObservasionClaseModel()
             {
-                ZXing.BarcodeFormat.EAN_8,
-                ZXing.BarcodeFormat.EAN_13,
-                ZXing.BarcodeFormat.AZTEC,
-                ZXing.BarcodeFormat.QR_CODE
+                Dni = DatosScaner.Dni,
+                IdCompany = DatosScaner.IdCompany,
+                Status = true,
+                CreateDate = DateTime.Now,
+                DniAdm = DatosScaner.DniAdm,
+                Observacion = Observacion,
+                Materia = SelectMateria.Materia,
+                IdAsistencia = IdAsistencia
             };
 
-            var overlay = new ZXingDefaultOverlay
-            {
-                ShowFlashButton = false,
-                TopText = "Coloca el código QR frente al dispositivo",
-                BottomText = "El escaneo es automático",
-                Opacity = 0.75
-            };
-            overlay.BindingContext = overlay;
-
-            var page = new ZXingScannerPage(options, overlay)
-            {
-                Title = "Escanear QR",
-                DefaultOverlayShowFlashButton = true,
-            };
-            await App.Navigator.PushAsync(page);
-
-            page.OnScanResult += (result) =>
-            {
-                page.IsScanning = false;
-
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await GetExisteAlumno();
-                    string[] array = f.base64Decode(result.Text).Split('#');
-                    var dni = array[2];
-                    IsEnable = true;
-                    var exist = ListadoAsistencias.Any(a => a.Dni == dni);
-                    if (!ListadoAsistencias.Any(a=> a.Dni == dni))
-                    {
-                        await App.Navigator.DisplayAlert("Alerta", $"Este estudiante en el Grado: {SelectGrados.NombreGrado}, Grupo: {SelectGrupos.NombreGrupo}, Materia: {SelectMateria.Materia}, Turno: {SelectTurnos.NombreTurno} !","Ok");
-                        await App.Navigator.PushAsync(new HomePage());
-                        return;
-                    }
-
-                    await App.Navigator.PushAsync(new CarnetViewPage(new DatosScanerModel()
-                    {
-                        IdCompany = 1,
-                        Dni = array[2],
-                        DniAdm = Settings.DNI,
-                        Turno = SelectTurnos,
-                        Grado = SelectGrados,
-                        Grupo = SelectGrupos,
-                        Materia = SelectMateria,
-                        Observacion = Observacion
-                    }));
-                });
-            };
-        }
-
-        async Task GetExisteAlumno()
-        {
-            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", obs, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
-                IsEnable = true;
                 return;
             }
 
-            try
-            {
-                Funciones.Funciones f = new Funciones.Funciones();
-                var listAsistencia = result.Result as ObservableCollection<ListadoAsistenciaModel>;
-
-                if (listAsistencia.Count == 0)
-                {
-                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
-                    IsEnable = true;
-                    await Application.Current.MainPage.DisplayAlert("Lista", "No existe ninguna lista de alumnos.", "Ok");
-                    return;
-                }
-
-                ListadoAsistencias = new ObservableCollection<ListadoAsistenciaModel>
-                    (
-                    listAsistencia.Select(s => new ListadoAsistenciaModel
-                    {
-                        Apellido = s.Apellido,
-                        Company = s.Company,
-                        Date = s.Date,
-                        Dni = s.Dni,
-                        Email = s.Email,
-                        Grado = s.Grado,
-                        Grupo = s.Grupo,
-                        Id = s.Id,
-                        IdCompany = s.IdCompany,
-                        Matricula = s.Matricula,
-                        Nombre = s.Nombre,
-                        Rh = s.Rh,
-                        Status = s.Status,
-                        Turno = s.Turno,
-                        Identificador = s.Identificador,
-                        Foto = s.Foto,
-                        Materia = "Matematica"//s.Materia,
-                        //ImageSource = f.Base64ToImage(s.Foto)
-                    })
-                    );
-
-                DependencyService.Get<ILodingPageService>().HideLoadingPage();
-            }
-            catch (Exception ex)
-            {
-                IsEnable = true;
-            }
+            DependencyService.Get<ILodingPageService>().HideLoadingPage();
+            //await App.Navigator.PushAsync(new HomePage());
+            Application.Current.MainPage = new MasterPage();
         }
     }
 }

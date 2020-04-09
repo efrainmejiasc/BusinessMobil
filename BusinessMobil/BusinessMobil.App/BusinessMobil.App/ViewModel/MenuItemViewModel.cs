@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessMobil.App.Helpers;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Views;
 using Xamarin.Forms;
@@ -29,8 +30,8 @@ namespace BusinessMobil.App.ViewModel
             switch (PageName)
             {
                 case "ScannerPage":
-                    await App.Navigator.PushAsync(new MenuScanerPage());
-                    //await ScanCode();
+                    //await App.Navigator.PushAsync(new MenuScanerPage());
+                    await ScanCode();
                     break;
                 case "RegisterDevicePage":
                     await App.Navigator.PushAsync(new RegisterDevicePage());
@@ -74,11 +75,17 @@ namespace BusinessMobil.App.ViewModel
             {
                 page.IsScanning = false;
 
-                //Device.BeginInvokeOnMainThread(async () =>
-                //{
-                //    string[] array = f.base64Decode(result.Text).Split('#');
-                //    await App.Navigator.PushAsync(new CarnetViewPage(array[2]));
-                //});     
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    string[] array = f.base64Decode(result.Text).Split('#');
+                    await App.Navigator.PushAsync(new CarnetViewPage(new DatosScanerModel() 
+                    { 
+                        Base64Dni = result.Text ,
+                        IdCompany = 1,
+                        Dni = array[2],
+                        DniAdm = Settings.DNI,
+                    }));
+                });
             };
         }
     }

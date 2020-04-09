@@ -26,16 +26,11 @@ namespace BusinessMobil.App.ViewModel
                 Uri = uri,
                 CachingEnabled = false
             };
-            Task.Run(async () =>
-            {
-                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
-                await Task.FromResult(Task.Delay(4000));
-                DependencyService.Get<ILodingPageService>().HideLoadingPage();
-            });
-            //Thread.Sleep(4000)
+            Task.Delay(3000);
         }
 
         public ICommand EnviarCommand => new Command(async () => await EnviarAsistencia());
+        public ICommand AgregarAsistenciaCommand => new Command(async () => await App.Navigator.PushAsync(new AgregarAsistenciaPage(DatosScaner)));
 
         private DatosScanerModel datosScaner;
         public DatosScanerModel DatosScaner
@@ -64,7 +59,7 @@ namespace BusinessMobil.App.ViewModel
                 Observacion = DatosScaner.Observacion,
                 Materia = DatosScaner.Materia.Materia,
             };
-            var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", DatosScaner, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", obs, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if(!result.IsSuccess)
             {
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
