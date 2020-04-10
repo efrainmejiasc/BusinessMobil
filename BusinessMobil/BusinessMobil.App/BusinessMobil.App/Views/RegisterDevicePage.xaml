@@ -17,25 +17,31 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <StackLayout Margin="0,30,0,0" Grid.Row="0">
+                    <Label Text="Nombre Completo"/>
+                    <Entry Text="{Binding NombreCompleto}"/>
+                </StackLayout>
+
+                <StackLayout Margin="0,30,0,0" Grid.Row="1">
                     <Label Text="Numero de telèfono"/>
                     <Entry Text="{Binding Phone}"/>
                 </StackLayout>
 
-                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="1">
+                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="2">
                     <Label Text="DNI"/>
                     <Entry Text="{Binding Dni}"/>
                 </StackLayout>
 
-                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="2">
+                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="3">
                     <Label Text="Codigo de Registro"/>
                     <Entry Text="{Binding Codigo}"/>
                 </StackLayout>
 
-                <StackLayout Grid.Row="3" Style="{StaticResource MargenButton}">
+                <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
                     <Button Text="Registrar" Command="{Binding RegisterCommand}"/>
                 </StackLayout>
             </Grid>

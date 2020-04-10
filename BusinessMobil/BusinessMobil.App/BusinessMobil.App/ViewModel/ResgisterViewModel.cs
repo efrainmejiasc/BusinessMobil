@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessMobil.App.Controls.Interface;
 using BusinessMobil.App.Model;
 using BusinessMobil.App.Service;
 using BusinessMobil.App.Views;
@@ -74,20 +75,22 @@ namespace BusinessMobil.App.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Campo Obligatorio", "Instrodusca la Contraseña!", "Ok");
                     return;
                 }
-
+                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
                 var register = new RegisterModel { Email = Email, User = User, Password = Password };
                 var result = await api.PostRespondeAsync<RegisterModel>("UserApi/CreateUser", register);
                 if (!result.IsSuccess)
                 {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
                     await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
                     return;
                 }
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await Application.Current.MainPage.DisplayAlert("Registro de Usuario", "Se ha registrado con exito!", "Ok");
                 await Navigation.PushAsync(new Login());
             }
             catch (Exception ex)
             {
-
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
             }
         }
     }

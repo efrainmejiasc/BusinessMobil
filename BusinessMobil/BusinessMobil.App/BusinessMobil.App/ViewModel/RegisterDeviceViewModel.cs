@@ -121,7 +121,9 @@ namespace BusinessMobil.App.ViewModel
                 User = User,
                 Email = Email,
                 Phone = Phone,
-                Dni = Dni.Value.ToString()
+                Dni = Dni.Value.ToString(),
+                Nombre = NombreCompleto,
+                IdCompany = Settings.IdCompany,
             };
 
             var result = await api.PostRespondeAsync("DeviceApi/RegisterDevice", register,new Token() { access_token =  Settings.Token, type_token = Settings.TypeToken});
