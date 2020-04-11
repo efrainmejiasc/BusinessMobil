@@ -333,7 +333,8 @@ namespace BusinessMobil.App.ViewModel
 
                 Alumno = result.Result as ListadoAsistenciaModel;
 
-                Turno = Alumno.Turno.ToString();//Turnos.FirstOrDefault(f => f.Id == Alumno.Turno).NombreTurno;
+                Turno = Alumno.Turno.ToString();
+                SelectTurnos = Turnos.FirstOrDefault(f => f.Id == Alumno.Turno);
                 Grupo = Alumno.Grupo;
                 Grado = Alumno.Grado;
 

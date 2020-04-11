@@ -172,4 +172,7 @@
     <BundleResource Include="Resources\logo.png" />
     <BundleResource Include="Resources\LOGOHORIZONTAL.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\noimage.png" />
+  </ItemGroup>
 </Project>

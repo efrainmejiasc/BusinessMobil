@@ -176,7 +176,7 @@ namespace BusinessMobil.App.ViewModel
                         Turno = s.Turno,
                         Identificador = s.Identificador,
                         Foto = s.Foto,
-                        Materia = SelectMateria.Materia//s.Materia,
+                        Materia = SelectMateria.Materia,//s.Materia,
                         //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );

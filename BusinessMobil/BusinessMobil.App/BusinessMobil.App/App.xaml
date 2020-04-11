@@ -7,6 +7,11 @@
              x:Class="BusinessMobil.App.App">
     <Application.Resources>
 
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#194973"/>
+            <Setter Property="BarTextColor" Value="#F2F2F2"/>
+        </Style>
+        
         <Style TargetType="Label" x:Key="NormalLabel">
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
@@ -53,8 +58,9 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#085CA6"/>
-            <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="BackgroundColor" Value="#194973"/>
+            <!--<Setter Property="BackgroundColor" Value="#085CA6"/>-->
+            <Setter Property="TextColor" Value="#F2F2F2"/>
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="CornerRadius" Value="5"/>
             <Setter Property="FontSize" Value="Small"/>
