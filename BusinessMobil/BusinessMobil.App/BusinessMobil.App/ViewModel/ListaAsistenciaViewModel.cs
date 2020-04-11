@@ -125,6 +125,7 @@ namespace BusinessMobil.App.ViewModel
                         Rh = s.Rh,
                         Status = s.Status,
                         Turno = s.Turno,
+                        Materia = s.Materia
                         //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
@@ -149,8 +150,10 @@ namespace BusinessMobil.App.ViewModel
                             IdCompany = s.IdCompany,
                             Status = s.Status,
                             Turno = s.Turno,
-                            DniAdm = Settings.Id,
+                            DniAdm = Settings.DNI,
                             Materia = s.Materia,
+                            Grupo = s.Grupo,
+                            Grado = s.Grado,
                             CreateDate = DateTime.Now
                         })
                     );

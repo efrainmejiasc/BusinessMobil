@@ -115,6 +115,7 @@ namespace BusinessMobil.App.ViewModel
             }
 
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            await Task.Delay(400);
             var register = new RegisterDeviceModel()
             {
                 Codigo = Codigo,

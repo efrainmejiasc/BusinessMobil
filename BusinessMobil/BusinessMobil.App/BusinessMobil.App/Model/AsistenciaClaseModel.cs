@@ -16,5 +16,7 @@ namespace BusinessMobil.App.Model
         public string Materia { get; set; }
         public int Turno { get; set; }
         public string EmailSend { get; set; }
+        public string Grupo { get; set; }
+        public string Grado { get; set; }
     }
 }

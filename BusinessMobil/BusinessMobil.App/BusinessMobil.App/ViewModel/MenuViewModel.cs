@@ -58,13 +58,13 @@ namespace BusinessMobil.App.ViewModel
         {
             var menu = new List<MenuModel>
             {
-                new MenuModel{ Title ="Perfil", Icon ="user.jpg", PageName = "" },
-                new MenuModel{ Title ="Inicio", Icon ="login.jpg", PageName = "", MenuDetail ="Autentificación" },
-                new MenuModel{ Title ="Asistencia Clase", Icon ="lista.jpg", PageName = "GenerarListaAsistenciaPage", MenuDetail = "Listado" },
-                new MenuModel{ Title ="Actualizar Asistencia", Icon ="qrcode.jpg", PageName = "", MenuDetail ="Lector QR" },
-                new MenuModel{ Title ="Registrar Dsipositivo", Icon ="regdispositivo.jpg", PageName = "RegisterDevicePage", MenuDetail = "Tu Teléfono" },
-                new MenuModel{ Title ="Escanear Carnet", Icon ="vercarnet.jpg", PageName = "ScannerPage", MenuDetail ="Ver" },
-                new MenuModel{ Title ="Salir", Icon ="logout.jpg", PageName = "", MenuDetail = "Cerrar Aplicación" },
+                new MenuModel{ Title ="Perfil", Icon ="menuuser.png", PageName = "" },
+                new MenuModel{ Title ="Inicio", Icon ="menulogin.png", PageName = "", MenuDetail ="Autentificación" },
+                new MenuModel{ Title ="Asistencia Clase", Icon ="menulista.png", PageName = "GenerarListaAsistenciaPage", MenuDetail = "Listado" },
+                new MenuModel{ Title ="Actualizar Asistencia", Icon ="menuactualizarlista.png", PageName = "", MenuDetail ="Lector QR" },
+                new MenuModel{ Title ="Registrar Dsipositivo", Icon ="menudevice.png", PageName = "RegisterDevicePage", MenuDetail = "Tu Teléfono" },
+                new MenuModel{ Title ="Escanear Carnet", Icon ="menuqr.png", PageName = "ScannerPage", MenuDetail ="Ver" },
+                new MenuModel{ Title ="Salir", Icon ="menulogout.png", PageName = "", MenuDetail = "Cerrar Aplicación" },
 
                 //new MenuModel { Icon = "", Title = "Escanear QR", PageName = "ScannerPage" },
                 //new MenuModel { Icon = "", Title = "Registrar Dispositivo", PageName = "RegisterDevicePage" },

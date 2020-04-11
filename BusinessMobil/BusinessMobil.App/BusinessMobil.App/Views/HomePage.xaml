@@ -11,7 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="logo"/>
+            <Image Grid.Row="0" Source="logo" Aspect="AspectFit"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

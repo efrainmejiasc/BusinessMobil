@@ -22,18 +22,18 @@
             <Grid BackgroundColor="#194973">
                 <!--<Image Source="bg.png" Aspect="AspectFill" />-->
                 <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="https://frutosdelande.com/wp-content/uploads/2020/03/1N.gif" Aspect="AspectFill" WidthRequest="85" HeightRequest="85" />
+                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="https://frutosdelande.com/wp-content/uploads/2020/03/1N.gif" Aspect="AspectFill" WidthRequest="95" HeightRequest="95" />
                     <Label Text="{Binding User}" TextColor="#F2F2F2" FontSize="Large" />
                 </StackLayout>
             </Grid>
             <StackLayout Margin="20,20,20,0" Grid.Row="1" Spacing="15">
-                <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True"
+                <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True" BackgroundColor="Transparent"
                           SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}"
                           Margin="0,40,0,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                            <ImageCell Text="{Binding Title}" ImageSource="{Binding Icon}" Detail="{Binding MenuDetail}" DetailColor="Black" Command="{Binding SelectMenuCommand}" Height="35"/>
-                            <!--<ViewCell>
+                            <!--<ImageCell Text="{Binding Title}" ImageSource="{Binding Icon}" Detail="{Binding MenuDetail}" DetailColor="Black" Command="{Binding SelectMenuCommand}" Height="35"/>-->
+                            <ViewCell>
                             
                             <Grid Margin="10">
                                 <Grid.GestureRecognizers>
@@ -47,7 +47,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                
+                                <Image Source="{Binding Icon}" Grid.Column="0" Grid.Row="0" WidthRequest="25" HeightRequest="25"/>
                                 <Label Grid.Column="1" Grid.Row="0"
                                        FontAttributes="None"
                                        FontSize="12"
@@ -55,7 +55,7 @@
                                        TextColor="Black"
                                        Text="{Binding Title}"/>
                                 </Grid>
-                        </ViewCell>-->
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

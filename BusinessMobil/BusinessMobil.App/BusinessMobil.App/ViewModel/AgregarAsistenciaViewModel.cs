@@ -110,6 +110,13 @@ namespace BusinessMobil.App.ViewModel
             set => SetValue(ref grados, value);
         }
 
+        bool status;
+        public bool Status
+        {
+            get => status;
+            set=> SetValue(ref status,value);
+        }
+
         private string observacion;
         public string Observacion
         {
@@ -315,6 +322,7 @@ namespace BusinessMobil.App.ViewModel
             try
             {
                 DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                await Task.Delay(400);
                 var result = await api.GetrespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPerson?identificador={DatosScaner.Base64Dni}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
                 if (!result.IsSuccess)
                 {
@@ -325,19 +333,10 @@ namespace BusinessMobil.App.ViewModel
 
                 Alumno = result.Result as ListadoAsistenciaModel;
 
-                Turno = Turnos.FirstOrDefault(f => f.Id == Alumno.Turno).NombreTurno;
+                Turno = Alumno.Turno.ToString();//Turnos.FirstOrDefault(f => f.Id == Alumno.Turno).NombreTurno;
                 Grupo = Alumno.Grupo;
                 Grado = Alumno.Grado;
 
-                result = await api.GetListRespondeAsync<AsistenciaModel>($"AsistenciaClaseApi/GetAsistenciaClase?fecha={DateTime.Now.Date}&grado={Grado}&grupo={Grupo}&idCompany={IdCompany}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
-                if (!result.IsSuccess)
-                {
-                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
-                    IsEnable = true;
-                    return;
-                }
-                var list = result.Result as ObservableCollection<AsistenciaModel>;
-                IdAsistencia = list.FirstOrDefault(f=> f.Dni == Alumno.Dni).Id;
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
             }
             catch (Exception ex)
@@ -433,12 +432,23 @@ namespace BusinessMobil.App.ViewModel
             }
 
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            await Task.Delay(300);
+
+            var result = await api.GetrespondeAsync<AsistenciaModel>($"AsistenciaClaseApi/GetAsistenciaClaseEstudiante?fecha={DateTime.Now.Date}&dni={Alumno.Dni}&materia={SelectMateria.Materia}&grado={Grado}&grupo={Grupo}&idCompany={IdCompany}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            if (!result.IsSuccess)
+            {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                IsEnable = true;
+                return;
+            }
+            var Asist = result.Result as AsistenciaModel;
+            IdAsistencia = Asist.Id;
 
             var obs = new ObservasionClaseModel()
             {
                 Dni = DatosScaner.Dni,
                 IdCompany = DatosScaner.IdCompany,
-                Status = true,
+                Status = Status,
                 CreateDate = DateTime.Now,
                 DniAdm = DatosScaner.DniAdm,
                 Observacion = Observacion,
@@ -446,7 +456,7 @@ namespace BusinessMobil.App.ViewModel
                 IdAsistencia = IdAsistencia
             };
 
-            var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", obs, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", obs, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();

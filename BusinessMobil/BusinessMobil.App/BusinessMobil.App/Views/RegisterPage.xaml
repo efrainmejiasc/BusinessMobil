@@ -18,7 +18,7 @@
                     <RowDefinition Height="Auto"/>
                     
                 </Grid.RowDefinitions>
-                <Image Source="logo.JPG" Grid.Row="0"/>
+                <Image Source="logo" Grid.Row="0"/>
                 <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}">
                     <Label Text="Email"/>
                     <Entry Text="{Binding Email}"/>
@@ -29,7 +29,7 @@
                 </StackLayout>
                 <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
                     <Label Text="Contraseña"/>
-                    <Entry Text="{Binding Password}"/>
+                    <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
                 <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
                     <Button Text="Registrarse" Command="{Binding RegistarCommand}"/>

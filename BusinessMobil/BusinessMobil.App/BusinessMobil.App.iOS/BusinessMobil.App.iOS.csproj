@@ -159,6 +159,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\menuactualizarlista.png" />
+    <AndroidResource Include="Resources\menucarnet.png" />
+    <AndroidResource Include="Resources\menudevice.png" />
+    <AndroidResource Include="Resources\menulista.png" />
+    <AndroidResource Include="Resources\menulogin.png" />
+    <AndroidResource Include="Resources\menulogout.png" />
+    <AndroidResource Include="Resources\menuqr.png" />
+    <AndroidResource Include="Resources\menuuser.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\logo.png" />
