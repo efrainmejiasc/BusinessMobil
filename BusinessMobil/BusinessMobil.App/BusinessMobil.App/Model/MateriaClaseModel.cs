@@ -6,7 +6,9 @@ namespace BusinessMobil.App.Model
         public MateriaClaseModel()
         {
         }
+
         public int Id { get; set; }
-        public string Materia { get; set; }
+        public int IdCompany { get; set; }
+        public string NombreMateria { get; set; }
     }
 }

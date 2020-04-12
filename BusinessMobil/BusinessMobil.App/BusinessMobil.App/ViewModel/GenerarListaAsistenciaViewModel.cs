@@ -176,7 +176,7 @@ namespace BusinessMobil.App.ViewModel
                         Turno = s.Turno,
                         Identificador = s.Identificador,
                         Foto = s.Foto,
-                        Materia = SelectMateria.Materia,//s.Materia,
+                        Materia = SelectMateria.NombreMateria,//s.Materia,
                         //ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
@@ -227,25 +227,10 @@ namespace BusinessMobil.App.ViewModel
                     NombreTurno = "Mañana"
                 }
             };
+            result = await api.GetListRespondeAsync<MateriaClaseModel>($"ToolCompany/GetMaterias?IdCompany={Settings.IdCompany}");
 
-            Materia = new ObservableCollection<MateriaClaseModel>()
-            {
-                new MateriaClaseModel
-                {
-                    Id = 1,
-                    Materia = "Matematica"
-                },
-                new MateriaClaseModel
-                {
-                    Id = 2,
-                    Materia = "Castellano"
-                },
-                new MateriaClaseModel
-                {
-                    Id = 3,
-                    Materia = "Ingles"
-                }
-            };
+            Materia = result.Result as ObservableCollection<MateriaClaseModel>;
+
         }
     }
 }
