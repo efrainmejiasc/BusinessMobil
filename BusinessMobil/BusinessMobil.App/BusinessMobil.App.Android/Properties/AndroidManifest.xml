@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.businessmobil.app" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="17" android:targetSdkVersion="28" />
+	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -9,6 +9,6 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.DEVICE_POWER" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<application android:label="Solo Educativa" android:usesCleartextTraffic="true" android:icon="@mipmap/launcher_foreground"></application>
+	<application android:label="Tu Identidad" android:usesCleartextTraffic="true" android:icon="@mipmap/ic_launcher"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

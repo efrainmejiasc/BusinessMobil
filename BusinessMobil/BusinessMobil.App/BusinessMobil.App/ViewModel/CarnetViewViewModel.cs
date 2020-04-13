@@ -57,7 +57,7 @@ namespace BusinessMobil.App.ViewModel
                 CreateDate = DateTime.Now,
                 DniAdm = DatosScaner.DniAdm,
                 Observacion = DatosScaner.Observacion,
-                Materia = DatosScaner.Materia.Materia,
+                Materia = DatosScaner.Materia.NombreMateria,
             };
             var result = await api.PostRespondeAsync("AsistenciaClaseApi/ObservacionClase", obs, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if(!result.IsSuccess)

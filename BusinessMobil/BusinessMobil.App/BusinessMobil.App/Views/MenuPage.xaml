@@ -22,7 +22,7 @@
             <Grid BackgroundColor="#194973">
                 <!--<Image Source="bg.png" Aspect="AspectFill" />-->
                 <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="https://frutosdelande.com/wp-content/uploads/2020/03/1N.gif" Aspect="AspectFill" WidthRequest="95" HeightRequest="95" />
+                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="noimage" Aspect="AspectFill" WidthRequest="95" HeightRequest="95" />
                     <Label Text="{Binding User}" TextColor="#F2F2F2" FontSize="Large" />
                 </StackLayout>
             </Grid>

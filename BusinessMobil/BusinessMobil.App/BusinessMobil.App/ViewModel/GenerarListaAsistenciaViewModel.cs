@@ -18,7 +18,7 @@ namespace BusinessMobil.App.ViewModel
         Api api = new Api();
         public GenerarListaAsistenciaViewModel()
         {
-            IdCompany = 1;
+            IdCompany = Settings.IdCompany;
             //Grado = "octavo";
             //Grupo = "A";
             //IdTurno = 1;
@@ -144,7 +144,8 @@ namespace BusinessMobil.App.ViewModel
             await Task.Delay(100);
             IsEnable = false;
 
-            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            //var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonList?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            var result = await api.GetListRespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPersonFull?idCompany={IdCompany}&grado={SelectGrados.NombreGrado}&grupo={SelectGrupos.NombreGrupo}&idTurno={SelectTurnos.Id}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
@@ -177,7 +178,7 @@ namespace BusinessMobil.App.ViewModel
                         Identificador = s.Identificador,
                         Foto = s.Foto,
                         Materia = SelectMateria.NombreMateria,//s.Materia,
-                        //ImageSource = f.Base64ToImage(s.Foto)
+                        ImageSource = f.Base64ToImage(s.Foto)
                     })
                     );
 
@@ -203,7 +204,7 @@ namespace BusinessMobil.App.ViewModel
 
         async void LlenarPiker()
         {
-            var result = await api.GetListRespondeAsync<GruposModel>("PersonApi/GetGrupos");
+            var result = await api.GetListRespondeAsync<GruposModel>($"PersonApi/GetGrupos?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
                 return;
@@ -211,7 +212,7 @@ namespace BusinessMobil.App.ViewModel
 
             Grupos = result.Result as ObservableCollection<GruposModel>;
 
-            result = await api.GetListRespondeAsync<GradosModel>("PersonApi/GetGrados");
+            result = await api.GetListRespondeAsync<GradosModel>($"PersonApi/GetGrados?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
                 return;
@@ -227,7 +228,12 @@ namespace BusinessMobil.App.ViewModel
                     NombreTurno = "Mañana"
                 }
             };
+
             result = await api.GetListRespondeAsync<MateriaClaseModel>($"ToolCompany/GetMaterias?IdCompany={Settings.IdCompany}");
+            if (!result.IsSuccess)
+            {
+                return;
+            }
 
             Materia = result.Result as ObservableCollection<MateriaClaseModel>;
 

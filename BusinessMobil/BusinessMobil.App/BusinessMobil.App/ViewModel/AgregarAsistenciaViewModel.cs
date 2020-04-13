@@ -180,7 +180,7 @@ namespace BusinessMobil.App.ViewModel
         async Task LlenarPiker()
         {
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
-            var result = await api.GetListRespondeAsync<GruposModel>("PersonApi/GetGrupos");
+            var result = await api.GetListRespondeAsync<GruposModel>($"PersonApi/GetGrupos?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
                 return;
@@ -188,7 +188,7 @@ namespace BusinessMobil.App.ViewModel
 
             Grupos = result.Result as ObservableCollection<GruposModel>;
 
-            result = await api.GetListRespondeAsync<GradosModel>("PersonApi/GetGrados");
+            result = await api.GetListRespondeAsync<GradosModel>($"PersonApi/GetGrados?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
                 return;
@@ -205,24 +205,13 @@ namespace BusinessMobil.App.ViewModel
                 }
             };
 
-            Materia = new ObservableCollection<MateriaClaseModel>()
+            result = await api.GetListRespondeAsync<MateriaClaseModel>($"ToolCompany/GetMaterias?IdCompany={Settings.IdCompany}");
+            if (!result.IsSuccess)
             {
-                new MateriaClaseModel
-                {
-                    Id = 1,
-                    Materia = "Matematica"
-                },
-                new MateriaClaseModel
-                {
-                    Id = 2,
-                    Materia = "Castellano"
-                },
-                new MateriaClaseModel
-                {
-                    Id = 3,
-                    Materia = "Ingles"
-                }
-            };
+                return;
+            }
+
+            Materia = result.Result as ObservableCollection<MateriaClaseModel>;
 
             DependencyService.Get<ILodingPageService>().HideLoadingPage();
         }
@@ -435,7 +424,7 @@ namespace BusinessMobil.App.ViewModel
             DependencyService.Get<ILodingPageService>().ShowLoadingPage();
             await Task.Delay(300);
 
-            var result = await api.GetrespondeAsync<AsistenciaModel>($"AsistenciaClaseApi/GetAsistenciaClaseEstudiante?fecha={DateTime.Now.Date}&dni={Alumno.Dni}&materia={SelectMateria.Materia}&grado={Grado}&grupo={Grupo}&idCompany={IdCompany}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+            var result = await api.GetrespondeAsync<AsistenciaModel>($"AsistenciaClaseApi/GetAsistenciaClaseEstudiante?fecha={DateTime.Now.Date}&dni={Alumno.Dni}&materia={SelectMateria.NombreMateria}&grado={Grado}&grupo={Grupo}&idCompany={IdCompany}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
             if (!result.IsSuccess)
             {
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
@@ -453,7 +442,7 @@ namespace BusinessMobil.App.ViewModel
                 CreateDate = DateTime.Now,
                 DniAdm = DatosScaner.DniAdm,
                 Observacion = Observacion,
-                Materia = SelectMateria.Materia,
+                Materia = SelectMateria.NombreMateria,
                 IdAsistencia = IdAsistencia
             };
 
