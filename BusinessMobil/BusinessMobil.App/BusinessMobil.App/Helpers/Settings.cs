@@ -68,5 +68,11 @@ namespace BusinessMobil.App.Helpers
             get => Setting.GetValueOrDefault(nameof(Status), false);
             set => Setting.AddOrUpdateValue(nameof(Status), value);
         }
+
+        public static string FotoUser
+        {
+            get => Setting.GetValueOrDefault(nameof(FotoUser), "camera.png");
+            set => Setting.AddOrUpdateValue(nameof(FotoUser), value);
+        }
     }
 }

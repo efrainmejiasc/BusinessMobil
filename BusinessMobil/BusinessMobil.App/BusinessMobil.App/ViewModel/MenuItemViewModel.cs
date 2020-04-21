@@ -39,6 +39,9 @@ namespace BusinessMobil.App.ViewModel
                 case "GenerarListaAsistenciaPage":
                     await App.Navigator.PushAsync(new GenerarListaAsistenciaPage());
                     break;
+                case "PerfilPage":
+                    await App.Navigator.PushAsync(new PerfilPage());
+                    break;
                 default:
                     break;
             }
