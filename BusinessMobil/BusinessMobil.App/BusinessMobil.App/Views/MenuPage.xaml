@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             mc:Ignorable="d"
+             Title="Menu"
+             x:Class="BusinessMobil.App.Views.MenuPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:MenuViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="#F2F2F2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid BackgroundColor="#194973">
+                <!--<Image Source="bg.png" Aspect="AspectFill" />-->
+                <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="noimage" Aspect="AspectFill" WidthRequest="95" HeightRequest="95" />
+                    <Label Text="{Binding User}" TextColor="#F2F2F2" FontSize="Large" />
+                </StackLayout>
+            </Grid>
+            <StackLayout Margin="20,20,20,0" Grid.Row="1" Spacing="15">
+                <ListView Grid.Column="0" Grid.ColumnSpan="2" HasUnevenRows="True" BackgroundColor="Transparent"
+                          SeparatorVisibility="None" ItemsSource="{Binding ListaMenu}"
+                          Margin="0,40,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <!--<ImageCell Text="{Binding Title}" ImageSource="{Binding Icon}" Detail="{Binding MenuDetail}" DetailColor="Black" Command="{Binding SelectMenuCommand}" Height="35"/>-->
+                            <ViewCell>
+                            
+                            <Grid Margin="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
+                                </Grid.GestureRecognizers>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Icon}" Grid.Column="0" Grid.Row="0" WidthRequest="25" HeightRequest="25"/>
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       FontAttributes="None"
+                                       FontSize="12"
+                                       VerticalOptions="Center"
+                                       TextColor="Black"
+                                       Text="{Binding Title}"/>
+                                </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </StackLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

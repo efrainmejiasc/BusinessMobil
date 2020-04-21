@@ -8,18 +8,18 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Mobile;
 using ZXing.Net.Mobile.Forms;
+using BusinessMobil.App.Funciones;
 
 namespace BusinessMobil.App.ViewModel
 {
     public class ScannerViewModel : BaseViewModel
     {
-        public ScannerViewModel(INavigation navigation)
+        Funciones.Funciones f = new Funciones.Funciones();
+        public ScannerViewModel()
         {
             ScannerCommand = new Command(async () => await ScanCode());
             barcodeText = "N/A";
         }
-
-        
 
         public ICommand ScannerCommand { get; set; }
 
@@ -47,7 +47,7 @@ namespace BusinessMobil.App.ViewModel
         async Task ScanCode()
         {
             var options = new MobileBarcodeScanningOptions();
-
+            
             options.PossibleFormats = new List<BarcodeFormat>()
             {
                 ZXing.BarcodeFormat.EAN_8,
@@ -59,7 +59,7 @@ namespace BusinessMobil.App.ViewModel
             var overlay = new ZXingDefaultOverlay
             {
                 ShowFlashButton = false,
-                TopText = "Coloca el código de barras frente al dispositivo",
+                TopText = "Coloca el código QR frente al dispositivo",
                 BottomText = "El escaneo es automático",
                 Opacity = 0.75
             };
@@ -67,10 +67,10 @@ namespace BusinessMobil.App.ViewModel
 
             var page = new ZXingScannerPage(options, overlay)
             {
-                Title = "Escanear Codigo",
+                Title = "Escanear QR",
                 DefaultOverlayShowFlashButton = true,
             };
-            await Navigation.PushAsync(page);
+            await App.Navigator.PushAsync(page);
 
             page.OnScanResult += (result) =>
             {
@@ -78,8 +78,8 @@ namespace BusinessMobil.App.ViewModel
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await Navigation.PopAsync();
-                    BarcodeText = result.Text;
+                    await App.Navigator.PopAsync();
+                    BarcodeText = f.base64Decode(result.Text);
                     BarcodeFormat = BarcodeFormatConverter.ConvertEnumToString(result.BarcodeFormat);
                 });
             };

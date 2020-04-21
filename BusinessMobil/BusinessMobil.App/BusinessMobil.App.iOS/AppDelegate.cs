@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using ImageCircle.Forms.Plugin.iOS;
 using UIKit;
 
 namespace BusinessMobil.App.iOS
@@ -24,6 +25,8 @@ namespace BusinessMobil.App.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+            ImageCircleRenderer.Init();
+
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }

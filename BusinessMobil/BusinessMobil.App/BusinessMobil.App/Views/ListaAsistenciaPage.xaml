@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             x:Class="BusinessMobil.App.Views.ListaAsistenciaPage"
+             Title="Listado de Asistencia">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Enviar Asistencia" Command="{Binding GenerarAsistenciaCommand}" Priority="0"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding ListadoAsistencias}" HasUnevenRows="True" SelectedItem="{Binding SelectItem,Mode=TwoWay}" IsPullToRefreshEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="80">
+                            <Grid Margin="10,5,0,5">
+                                <!--<Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectAsistenciaCommand}"/>
+                                </Grid.GestureRecognizers>-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" WidthRequest="70">
+                                    <controls:CircleImage Source="{Binding ImageSource}" Aspect="AspectFill">
+                                        <controls:CircleImage.WidthRequest>
+                                            <OnPlatform x:TypeArguments="x:Double">
+                                                <On Platform="Android, iOS">70</On>
+                                            </OnPlatform>
+                                        </controls:CircleImage.WidthRequest>
+                                        <controls:CircleImage.HeightRequest>
+                                            <OnPlatform x:TypeArguments="x:Double">
+                                                <On Platform="Android, iOS">70</On>
+                                            </OnPlatform>
+                                        </controls:CircleImage.HeightRequest>
+                                    </controls:CircleImage>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="Center">
+                                    <Label Text="{Binding Nombre}"
+                                       FontSize="12" TextColor="Black"
+                                       HorizontalOptions="FillAndExpand"/>
+
+                                    <Label Text="{Binding Apellido}"
+                                       FontSize="12" TextColor="Black"
+                                     HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2" Orientation="Vertical" VerticalOptions="Center">
+                                    <Label Text="{Binding Dni}"
+                                       FontSize="12" TextColor="Black"
+                                       HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <CheckBox Grid.Column="3" IsChecked="{Binding Status}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

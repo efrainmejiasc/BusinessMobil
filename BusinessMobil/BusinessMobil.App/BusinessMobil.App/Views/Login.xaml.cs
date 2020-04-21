@@ -10,6 +10,7 @@ namespace BusinessMobil.App.Views
         public Login()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

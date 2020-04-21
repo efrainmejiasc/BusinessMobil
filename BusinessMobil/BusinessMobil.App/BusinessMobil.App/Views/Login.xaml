@@ -9,25 +9,31 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="10">
+        <ScrollView>
+            <Grid Style="{StaticResource MargenContentPage}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="220"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Image Source="EMHU0519.JPG" Grid.Row="0"/>
-                <StackLayout Grid.Row="1">
+                <Image Source="logo" Grid.Row="0"/>
+                <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}">
                     <Label Text="Usuario o Email"/>
-                <Entry Text="{Binding EMail}"/>
+                <Entry Text="{Binding Email}"/>
                 </StackLayout>
-                <StackLayout Grid.Row="2">
+                <StackLayout Grid.Row="2" Style="{StaticResource MargenControl}">
                     <Label Text="Contraseña"/>
-                <Entry Text="{Binding Password}"/>
+                <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
-                <Button Grid.Row="3" Text="Entrar" Command="{Binding EntrarCommand}" Margin="0"/>
+                <StackLayout Grid.Row="3" Style="{StaticResource MargenButton}">
+                    <Button Text="Entrar" Command="{Binding EntrarCommand}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
+                    <Button Text="Registrarse" Command="{Binding RegistrarseCommand}"/>
+                </StackLayout>
             </Grid>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

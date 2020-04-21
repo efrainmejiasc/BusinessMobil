@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             Title="Generar Lista de Asistencia"
+             x:Class="BusinessMobil.App.Views.GenerarListaAsistenciaPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:GenerarListaAsistenciaViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Style="{StaticResource MargenContentPage}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Margin="0,30,0,0">
+                    <Label Text="Grado"></Label>
+                    <Picker ItemsSource="{Binding Grados}" SelectedItem="{Binding SelectGrados}" ItemDisplayBinding="{Binding NombreGrado}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}">
+                    <Label Text="Grupo"></Label>
+                    <Picker ItemsSource="{Binding Grupos}" SelectedItem="{Binding SelectGrupos}" ItemDisplayBinding="{Binding NombreGrupo}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2" Style="{StaticResource MargenControl}">
+                    <Label Text="Materia"></Label>
+                    <Picker ItemsSource="{Binding Materia}" SelectedItem="{Binding SelectMateria}" ItemDisplayBinding="{Binding NombreMateria}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
+                    <Label Text="Turno"></Label>
+                    <Picker ItemsSource="{Binding Turnos}" SelectedItem="{Binding SelectTurnos}" ItemDisplayBinding="{Binding NombreTurno}"/>
+                </StackLayout>
+            <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
+                <Button Command="{Binding GenerarListaAsistenciaCommand}" Text="Generar Lista de Asistencia" IsEnabled="{Binding IsEnable}"/>
+            </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

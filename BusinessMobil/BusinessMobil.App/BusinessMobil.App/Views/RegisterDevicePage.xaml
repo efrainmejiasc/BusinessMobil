@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+    Title="Registrar Dispositivo"
+    x:Class="BusinessMobil.App.Views.RegisterDevicePage">
+
+    <ContentPage.BindingContext>
+        <viewModel:RegisterDeviceViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid Style="{StaticResource MargenContentPage}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Margin="0,30,0,0" Grid.Row="0">
+                    <Label Text="Nombre Completo"/>
+                    <Entry Text="{Binding NombreCompleto}"/>
+                </StackLayout>
+
+                <StackLayout Margin="0,30,0,0" Grid.Row="1">
+                    <Label Text="Numero de telèfono"/>
+                    <Entry Text="{Binding Phone}"/>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="2">
+                    <Label Text="DNI"/>
+                    <Entry Text="{Binding Dni}"/>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource MargenControl}" Grid.Row="3">
+                    <Label Text="Codigo de Registro"/>
+                    <Entry Text="{Binding Codigo}"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
+                    <Button Text="Registrar" Command="{Binding RegisterCommand}"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

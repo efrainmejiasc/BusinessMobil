@@ -6,6 +6,12 @@
              mc:Ignorable="d"
              x:Class="BusinessMobil.App.App">
     <Application.Resources>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#194973"/>
+            <Setter Property="BarTextColor" Value="#F2F2F2"/>
+        </Style>
+        
         <Style TargetType="Label" x:Key="NormalLabel">
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
@@ -13,17 +19,51 @@
         </Style>
 
         <Style TargetType="Label" x:Key="ResultLabel">
-            <Setter Property="TextColor" Value="Blue" />
+            <Setter Property="TextColor" Value="#8C8C8C" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="FontSize" Value="Caption" />
+        </Style>
+
+        <Style TargetType="ContentPage">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+        </Style>
+
+        <Style TargetType="StackLayout" x:Key="MargenControl">
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="VerticalOptions" Value="StartAndExpand"/>
+        </Style>
+
+        <Style TargetType="StackLayout" x:Key="MargenButton">
+            <Setter Property="Margin" Value="0,2.5,0,2.5"/>
+        </Style>
+
+        <Style TargetType="Grid" x:Key="MargenContentPage">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
 
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="Wheat" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
             <Setter Property="MinimumWidthRequest" Value="500" />
-            <Setter Property="TextColor" Value="Blue" />
+            <Setter Property="TextColor" Value="#19200F" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#194973"/>
+            <!--<Setter Property="BackgroundColor" Value="#085CA6"/>-->
+            <Setter Property="TextColor" Value="#F2F2F2"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="FontSize" Value="Small"/>
         </Style>
     </Application.Resources>
 </Application>

@@ -1,34 +1,40 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BusinessMobil.App.Views.RegisterPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             x:Class="BusinessMobil.App.Views.RegisterPage">
+    <ContentPage.BindingContext>
+        <viewModel:ResgisterViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="10">
+        <ScrollView>
+            <Grid Style="{StaticResource MargenContentPage}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="1" Margin="0,10,0,0">
+                <Image Source="logo" Grid.Row="0"/>
+                <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}">
                     <Label Text="Email"/>
-                    <Entry/>
+                    <Entry Text="{Binding Email}"/>
                 </StackLayout>
-                <StackLayout Grid.Row="2" Margin="0,10,0,0">
+                <StackLayout Grid.Row="2" Style="{StaticResource MargenControl}">
                     <Label Text="Usuario"/>
-                    <Entry/>
+                    <Entry Text="{Binding User}"/>
                 </StackLayout>
-                <StackLayout Grid.Row="3" Margin="0,10,0,0">
-                    <Label Text="Contraseña" Grid.Row="5"/>
-                    <Entry Grid.Row="6"/>
+                <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
+                    <Label Text="Contraseña"/>
+                    <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
-                <StackLayout Grid.Row="4" Margin="0,10,0,0">
-                    <Label Text="Compañia" Grid.Row="7"/>
-                    <Entry Grid.Row="8"/>
+                <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
+                    <Button Text="Registrarse" Command="{Binding RegistarCommand}"/>
                 </StackLayout>
-                <Button Grid.Row="5" Text="Registrarse"/>
             </Grid>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
