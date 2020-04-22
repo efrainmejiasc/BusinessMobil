@@ -60,8 +60,8 @@ namespace BusinessMobil.App.ViewModel
             {
                 new MenuModel{ Title ="Perfil", Icon ="menuuser.png", PageName = "PerfilPage" },
                 new MenuModel{ Title ="Inicio", Icon ="menulogin.png", PageName = "", MenuDetail ="Autentificación" },
-                new MenuModel{ Title ="Asistencia Clase", Icon ="menulista.png", PageName = "GenerarListaAsistenciaPage", MenuDetail = "Listado" },
-                //new MenuModel{ Title ="Actualizar Asistencia", Icon ="menuactualizarlista.png", PageName = "", MenuDetail ="Lector QR" },
+                new MenuModel{ Title ="Asistencia", Icon ="menulista.png", PageName = "GenerarListaAsistenciaPage", MenuDetail = "Listado" },
+                new MenuModel{ Title ="Carnet", Icon ="menucarnet.png", PageName = "", MenuDetail ="" },
                 new MenuModel{ Title ="Registrar Dipositivo", Icon ="menudevice.png", PageName = "RegisterDevicePage", MenuDetail = "Tu Teléfono" },
                 new MenuModel{ Title ="Escanear Carnet", Icon ="menuqr.png", PageName = "ScannerPage", MenuDetail ="Ver" },
                 new MenuModel{ Title ="Salir", Icon ="menulogout.png", PageName = "", MenuDetail = "Cerrar Aplicación" },
