@@ -31,8 +31,8 @@ namespace BusinessMobil.App.ViewModel
             //    await LlenarPiker();
             //    await GetDatosAlumno();
             //});
-            LlenarPiker();
-            GetDatosAlumno();
+            Task.Run(async ()=> await LlenarPiker());
+            Task.Run(async ()=> await GetDatosAlumno());
             IsEnable = true;
         }
 

@@ -30,7 +30,6 @@ namespace BusinessMobil.App.ViewModel
             switch (PageName)
             {
                 case "ScannerPage":
-                    //await App.Navigator.PushAsync(new MenuScanerPage());
                     await ScanCode();
                     break;
                 case "RegisterDevicePage":
@@ -40,6 +39,9 @@ namespace BusinessMobil.App.ViewModel
                     await App.Navigator.PushAsync(new GenerarListaAsistenciaPage());
                     break;
                 case "PerfilPage":
+                    await App.Navigator.PushAsync(new PerfilPage());
+                    break;
+                case "CarnetPage":
                     await App.Navigator.PushAsync(new PerfilPage());
                     break;
                 default:

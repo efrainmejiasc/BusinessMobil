@@ -22,7 +22,7 @@ namespace BusinessMobil.App.ViewModel
             //Grado = "octavo";
             //Grupo = "A";
             //IdTurno = 1;
-            LlenarPiker();
+            Task.Run(async ()=> await LlenarPiker());
             IsEnable = true;
         }
         public ICommand GenerarListaAsistenciaCommand
@@ -202,7 +202,7 @@ namespace BusinessMobil.App.ViewModel
             }
         }
 
-        async void LlenarPiker()
+        async Task LlenarPiker()
         {
             var result = await api.GetListRespondeAsync<GruposModel>($"PersonApi/GetGrupos?idCompany={IdCompany}");
             if (!result.IsSuccess)
