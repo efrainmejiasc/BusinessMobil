@@ -64,7 +64,7 @@ namespace BusinessMobil.App.ViewModel
                 new MenuModel{ Title ="Registrar Dipositivo", Icon ="menudevice.png", PageName = "RegisterDevicePage", MenuDetail = "Tu Teléfono" },
                 new MenuModel{ Title ="Escanear Carnet", Icon ="menuqr.png", PageName = "ScannerPage", MenuDetail ="Ver" },
                 new MenuModel{ Title ="Carnet", Icon ="menucarnet.png", PageName = "CarnetPage", MenuDetail ="" },
-                new MenuModel{ Title ="Salir", Icon ="menulogout.png", PageName = "", MenuDetail = "Cerrar Aplicación" },
+                new MenuModel{ Title ="Salir", Icon ="menulogout.png", PageName = "SalirPage", MenuDetail = "Cerrar Aplicación" },
             };
 
             listaMenu = new ObservableCollection<MenuModel>(menu.Select(m=> new MenuItemViewModel { Icon = m.Icon, Title = m.Title, PageName = m.PageName }).OrderBy(o=> o.Title).ToList());

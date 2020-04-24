@@ -16,7 +16,7 @@ namespace BusinessMobil.App.ViewModel
         string ruta = "http://joselelu-001-site2.etempurl.com/digitalcard/";
         public DniViewModel()
         {
-            Dni = "1021933909";
+            //Dni = "1021933909";
         }
 
         public ICommand AgregarAsistenciaCommand => new Command(async () => await GetAsistencia());

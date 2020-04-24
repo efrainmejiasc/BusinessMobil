@@ -44,6 +44,19 @@ namespace BusinessMobil.App.ViewModel
                 case "CarnetPage":
                     await App.Navigator.PushAsync(new DniPage());
                     break;
+                case "SalirPage":
+                    Settings.Email = string.Empty;
+                    Settings.IdCompany = 0;
+                    Settings.IdTypeUser = 0;
+                    Settings.Password = string.Empty;
+                    Settings.Status = false;
+                    Settings.Token = string.Empty;
+                    Settings.TypeToken = string.Empty;
+                    Settings.DNI = string.Empty;
+                    Settings.User = string.Empty;
+                    Settings.Id = string.Empty;
+                    await App.Navigator.PushAsync(new Login());
+                    break;
                 default:
                     break;
             }
