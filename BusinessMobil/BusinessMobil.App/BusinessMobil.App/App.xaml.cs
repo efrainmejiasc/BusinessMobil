@@ -14,7 +14,7 @@ namespace BusinessMobil.App
         public App()
         {
             InitializeComponent();
-            if(!string.IsNullOrEmpty(Settings.Email))
+            if(!string.IsNullOrEmpty(Settings.Email) && !string.IsNullOrEmpty(Settings.Token))
                 Application.Current.MainPage = new MasterPage();
             else
                 MainPage = new NavigationPage(new Login());

@@ -24,15 +24,8 @@ namespace BusinessMobil.App.ViewModel
         {
             api = new Api();
             f = new Funciones.Funciones();
-            IdCompany = 1;
             DatosScaner = datos;
-            //Task.Run(async () =>
-            //{
-            //    await LlenarPiker();
-            //    await GetDatosAlumno();
-            //});
-            Task.Run(async ()=> await LlenarPiker());
-            Task.Run(async ()=> await GetDatosAlumno());
+            GetDatosAlumno();
             IsEnable = true;
         }
 
@@ -177,12 +170,14 @@ namespace BusinessMobil.App.ViewModel
 
         #endregion
 
-        async Task LlenarPiker()
+        async void LlenarPiker()
         {
-            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            //DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            //await Task.Delay(100);
             var result = await api.GetListRespondeAsync<GruposModel>($"PersonApi/GetGrupos?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
@@ -191,6 +186,7 @@ namespace BusinessMobil.App.ViewModel
             result = await api.GetListRespondeAsync<GradosModel>($"PersonApi/GetGrados?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
@@ -208,12 +204,11 @@ namespace BusinessMobil.App.ViewModel
             result = await api.GetListRespondeAsync<MateriaClaseModel>($"ToolCompany/GetMaterias?IdCompany={Settings.IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
             Materia = result.Result as ObservableCollection<MateriaClaseModel>;
-
-            DependencyService.Get<ILodingPageService>().HideLoadingPage();
         }
         //async Task ScanCode()
         //{
@@ -306,13 +301,20 @@ namespace BusinessMobil.App.ViewModel
         //        });
         //    };
         //}
-        async Task GetDatosAlumno()
+        async void GetDatosAlumno()
         {
             try
             {
                 DependencyService.Get<ILodingPageService>().ShowLoadingPage();
                 await Task.Delay(400);
-                var result = await api.GetrespondeAsync<ListadoAsistenciaModel>($"PersonApi/GetPerson?identificador={DatosScaner.Base64Dni}", new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
+                LlenarPiker();
+                string url = string.Empty;
+
+                if (!string.IsNullOrEmpty(DatosScaner.Base64Dni))
+                    url = $"PersonApi/GetPerson?identificador={DatosScaner.Base64Dni}";
+                else
+                    url = $"PersonApi/GetPersonEspecific?dni={DatosScaner.Dni}";
+                var result = await api.GetrespondeAsync<ListadoAsistenciaModel>(url, new Token { access_token = Settings.Token, type_token = Settings.TypeToken });
                 if (!result.IsSuccess)
                 {
                     DependencyService.Get<ILodingPageService>().HideLoadingPage();

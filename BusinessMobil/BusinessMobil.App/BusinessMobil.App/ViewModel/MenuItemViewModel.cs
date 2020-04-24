@@ -42,7 +42,7 @@ namespace BusinessMobil.App.ViewModel
                     await App.Navigator.PushAsync(new PerfilPage());
                     break;
                 case "CarnetPage":
-                    await App.Navigator.PushAsync(new PerfilPage());
+                    await App.Navigator.PushAsync(new DniPage());
                     break;
                 default:
                     break;

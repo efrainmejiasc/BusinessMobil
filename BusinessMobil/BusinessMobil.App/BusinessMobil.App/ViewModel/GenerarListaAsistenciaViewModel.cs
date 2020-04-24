@@ -22,7 +22,8 @@ namespace BusinessMobil.App.ViewModel
             //Grado = "octavo";
             //Grupo = "A";
             //IdTurno = 1;
-            Task.Run(async ()=> await LlenarPiker());
+            //Task.Run(async ()=> await LlenarPiker());
+            LlenarPiker();
             IsEnable = true;
         }
         public ICommand GenerarListaAsistenciaCommand
@@ -204,9 +205,13 @@ namespace BusinessMobil.App.ViewModel
 
         async Task LlenarPiker()
         {
+            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+            await Task.Delay(100);
+
             var result = await api.GetListRespondeAsync<GruposModel>($"PersonApi/GetGrupos?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
@@ -215,6 +220,7 @@ namespace BusinessMobil.App.ViewModel
             result = await api.GetListRespondeAsync<GradosModel>($"PersonApi/GetGrados?idCompany={IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
@@ -232,11 +238,12 @@ namespace BusinessMobil.App.ViewModel
             result = await api.GetListRespondeAsync<MateriaClaseModel>($"ToolCompany/GetMaterias?IdCompany={Settings.IdCompany}");
             if (!result.IsSuccess)
             {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 return;
             }
 
             Materia = result.Result as ObservableCollection<MateriaClaseModel>;
-
+            DependencyService.Get<ILodingPageService>().HideLoadingPage();
         }
     }
 }

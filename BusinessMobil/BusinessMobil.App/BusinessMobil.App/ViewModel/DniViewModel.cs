@@ -14,6 +14,11 @@ namespace BusinessMobil.App.ViewModel
     public class DniViewModel : BaseViewModel
     {
         string ruta = "http://joselelu-001-site2.etempurl.com/digitalcard/";
+        public DniViewModel()
+        {
+            Dni = "1021933909";
+        }
+
         public ICommand AgregarAsistenciaCommand => new Command(async () => await GetAsistencia());
         public ICommand BuscarDatosCommand => new Command(async () => await GetDniAsync());
 
@@ -40,19 +45,34 @@ namespace BusinessMobil.App.ViewModel
 
         async Task GetDniAsync()
         {
-            DependencyService.Get<ILodingPageService>().ShowLoadingPage();
-            Uri uri = new Uri($"{ruta}{Dni}.jpg");
-            DatosScaner.Dni = Dni;
-            DatosScaner.DniAdm = Settings.DNI;
-            DatosScaner.IdCompany = Settings.IdCompany;
-
-            Carnet = new UriImageSource
+            try
             {
-                Uri = uri,
-                CachingEnabled = false
-            };
-            await Task.Delay(3000);
-            DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                DependencyService.Get<ILodingPageService>().ShowLoadingPage();
+                Uri uri = new Uri($"{ruta}{Dni}.jpg");
+                await Task.Delay(3000);
+                DatosScaner = new DatosScanerModel();
+                DatosScaner.Dni = Dni;
+                DatosScaner.DniAdm = Settings.DNI;
+                DatosScaner.IdCompany = Settings.IdCompany;
+                DatosScaner.Base64Dni = string.Empty;
+
+                Carnet = new UriImageSource
+                {
+                    Uri = uri,
+                    CachingEnabled = false
+                };
+                await Task.Delay(3000);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                DependencyService.Get<ILodingPageService>().HideLoadingPage();
+            }
+            
         }
         async Task GetAsistencia()
         {

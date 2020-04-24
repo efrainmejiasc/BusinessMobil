@@ -28,7 +28,17 @@
                 <Grid BackgroundColor="#194973">
                     <!--<Image Source="bg.png" Aspect="AspectFill" />-->
                     <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <controls:CircleImage BorderColor="White" BorderThickness="2" Source="{Binding ImageSource}" Aspect="AspectFill" WidthRequest="115" HeightRequest="115">
+                        <controls:CircleImage BorderColor="White" BorderThickness="2" Source="{Binding ImageSource}" Aspect="AspectFill">
+                            <controls:CircleImage.WidthRequest>
+                                <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android, iOS">180</On>
+                                </OnPlatform>
+                            </controls:CircleImage.WidthRequest>
+                            <controls:CircleImage.HeightRequest>
+                                <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android, iOS">180</On>
+                                </OnPlatform>
+                            </controls:CircleImage.HeightRequest>
                             <controls:CircleImage.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                             </controls:CircleImage.GestureRecognizers>
