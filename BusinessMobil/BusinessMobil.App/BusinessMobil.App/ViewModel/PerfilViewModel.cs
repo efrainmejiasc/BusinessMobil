@@ -14,9 +14,21 @@ namespace BusinessMobil.App.ViewModel
         private MediaFile file;
         public PerfilViewModel()
         {
-            Settings.FotoUser = !string.IsNullOrEmpty(Settings.FotoUser.ToString()) ? Settings.FotoUser : "camera.png";
+            Settings.FotoUser = !string.IsNullOrEmpty(Settings.FotoUser.ToString()) ? Settings.FotoUser : "noimage.png";
             ImageSource = Settings.FotoUser;
+            Email = Settings.Email;
+            DI = Settings.DNI;
+            Telefono = Settings.Telefono;
+            NombreCompleto = Settings.NombreCompleto;
         }
+
+        #region Propiedades
+        public string NombreCompleto { get; set; }
+        public string Email { get; set; }
+        public string Telefono { get; set; }
+        public string DI { get; set; }
+        #endregion
+
         #region ICommand
         public ICommand ChangeImageCommand => new Command(ChangeImageAsync);
 
@@ -31,46 +43,53 @@ namespace BusinessMobil.App.ViewModel
         #region Funciones
         async void ChangeImageAsync()
         {
-            await CrossMedia.Current.Initialize();
-
-            var source = await Application.Current.MainPage.DisplayActionSheet(
-                "¿Donde tomas la foto?",
-                "Cancelar",
-                null,
-                "De la galería",
-                "Desde camara");
-
-            if (source == "Cancelar")
+            try
             {
-                this.file = null;
-                return;
-            }
+                await CrossMedia.Current.Initialize();
 
-            if (source == "Desde camara")
-            {
-                this.file = await CrossMedia.Current.TakePhotoAsync(
-                    new StoreCameraMediaOptions
-                    {
-                        Directory = "Sample",
-                        Name = "photoperfil.jpg",
-                        PhotoSize = PhotoSize.Small,
-                    }
-                );
-            }
-            else
-            {
-                this.file = await CrossMedia.Current.PickPhotoAsync();
-            }
+                var source = await Application.Current.MainPage.DisplayActionSheet(
+                    "¿Donde tomas la foto?",
+                    "Cancelar",
+                    null,
+                    "De la galería",
+                    "Desde camara");
 
-            if (this.file != null)
-            {
-                this.ImageSource = ImageSource.FromStream(() =>
+                if (source == "Cancelar")
                 {
-                    var stream = file.GetStream();
-                    return stream;
-                });
+                    this.file = null;
+                    return;
+                }
+
+                if (source == "Desde camara")
+                {
+                    this.file = await CrossMedia.Current.TakePhotoAsync(
+                        new StoreCameraMediaOptions
+                        {
+                            Directory = "Sample",
+                            Name = "photoperfil.jpg",
+                            PhotoSize = PhotoSize.Small,
+                        }
+                    );
+                }
+                else
+                {
+                    this.file = await CrossMedia.Current.PickPhotoAsync();
+                }
+
+                if (this.file != null)
+                {
+                    this.ImageSource = ImageSource.FromStream(() =>
+                    {
+                        var stream = file.GetStream();
+                        return stream;
+                    });
+                }
+                Settings.FotoUser = file.Path;
             }
-            Settings.FotoUser = file.Path;
+            catch (Exception ex)
+            {
+
+            }
         }
         #endregion
     }

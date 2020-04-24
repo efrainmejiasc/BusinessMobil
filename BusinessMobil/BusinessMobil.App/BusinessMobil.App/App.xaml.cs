@@ -14,22 +14,10 @@ namespace BusinessMobil.App
         public App()
         {
             InitializeComponent();
-            //NavigationPage navPage = new NavigationPage
-            //{
-            //    BarBackgroundColor = Color.FromHex("#1FBED6"),
-            //    BarTextColor = Color.FromHex("#000000")
-            //};
-            //if(string.IsNullOrEmpty(Settings.Email))
-            MainPage = new NavigationPage(new Login());
-                //{
-                //    BarBackgroundColor = Color.FromHex("#FFFFFF"),
-                //    BarTextColor = Color.FromHex("#F4F4F4")
-                //};
-            //else
-            //  MainPage = new NavigationPage(new MainPage());
-
-            
-
+            if(!string.IsNullOrEmpty(Settings.Email))
+                Application.Current.MainPage = new MasterPage();
+            else
+                MainPage = new NavigationPage(new Login());
         }
 
         protected override void OnStart()

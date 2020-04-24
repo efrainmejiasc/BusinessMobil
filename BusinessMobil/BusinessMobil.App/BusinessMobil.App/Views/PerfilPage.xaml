@@ -7,9 +7,11 @@
              xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
              mc:Ignorable="d"
              x:Class="BusinessMobil.App.Views.PerfilPage">
+
     <ContentPage.BindingContext>
         <viewModel:PerfilViewModel/>
     </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="#F2F2F2">
@@ -22,6 +24,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <Grid BackgroundColor="#194973">
                     <!--<Image Source="bg.png" Aspect="AspectFill" />-->
                     <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -30,31 +33,26 @@
                                 <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                             </controls:CircleImage.GestureRecognizers>
                         </controls:CircleImage>
-                        <Label Text="{Binding User}" TextColor="#F2F2F2" FontSize="Large" />
+                        <Label Text="{Binding NombreCompleto}" TextColor="#F2F2F2" FontSize="Large" />
                     </StackLayout>
                 </Grid>
+                
                 <StackLayout Margin="20,20,20,0" Grid.Row="1" Spacing="15">
-                    <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}" BackgroundColor="Transparent">
-                        <Label Text="Nombre Completo"/>
-                        <Entry Text="{Binding Email}" BackgroundColor="Transparent" IsEnabled="False"/>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Margin="20,20,20,0" Grid.Row="2" Spacing="15">
                     <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}" BackgroundColor="Transparent">
                         <Label Text="Email"/>
                         <Entry Text="{Binding Email}" BackgroundColor="Transparent" IsEnabled="False"/>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Margin="20,20,20,0" Grid.Row="3" Spacing="15">
+                <StackLayout Margin="20,20,20,0" Grid.Row="2" Spacing="15">
                     <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}" BackgroundColor="Transparent">
                         <Label Text="Teléfono"/>
-                        <Entry Text="{Binding Email}" BackgroundColor="Transparent" IsEnabled="False"/>
+                        <Entry Text="{Binding Telefono}" BackgroundColor="Transparent" IsEnabled="False"/>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Margin="20,20,20,0" Grid.Row="4" Spacing="15">
+                <StackLayout Margin="20,20,20,0" Grid.Row="3" Spacing="15">
                     <StackLayout Grid.Row="1" Style="{StaticResource MargenControl}" BackgroundColor="Transparent">
-                        <Label Text="Compañia"/>
-                        <Entry Text="{Binding Email}" BackgroundColor="Transparent" IsEnabled="False"/>
+                        <Label Text="DI"/>
+                        <Entry Text="{Binding DI}" BackgroundColor="Transparent" IsEnabled="False"/>
                     </StackLayout>
                 </StackLayout>
             </Grid>

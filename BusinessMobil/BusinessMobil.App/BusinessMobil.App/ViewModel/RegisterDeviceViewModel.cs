@@ -129,11 +129,14 @@ namespace BusinessMobil.App.ViewModel
 
             var result = await api.PostRespondeAsync("DeviceApi/RegisterDevice", register,new Token() { access_token =  Settings.Token, type_token = Settings.TypeToken});
             if (!result.IsSuccess)
-            {
+            {    
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 await Application.Current.MainPage.DisplayAlert("Error!", result.Message, "Ok");
                 return;
             }
+
+            Settings.NombreCompleto = NombreCompleto;
+            Settings.Telefono = Phone;
             DependencyService.Get<ILodingPageService>().HideLoadingPage();
             await Application.Current.MainPage.DisplayAlert("Registro de Dispositivo", "Se ha registrado con exito!","Ok");
             Application.Current.MainPage = new MasterPage();
