@@ -28,14 +28,14 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="270"/>
+                            <ColumnDefinition Width="290"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0">
                             <Label Text="Documento de Identidad"/>
                             <Entry Text="{Binding Dni}" BackgroundColor="Transparent" />
                         </StackLayout>
-                        <Button Grid.Column="1" WidthRequest="70" HeightRequest="30" Text="+" Command="{Binding BuscarDatosCommand}" />
+                        <Button Grid.Column="1" WidthRequest="70" HeightRequest="30" ImageSource="search" Command="{Binding BuscarDatosCommand}" />
                     </Grid>
                 </StackLayout>
                 

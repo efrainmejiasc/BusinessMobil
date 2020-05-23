@@ -91,6 +91,7 @@ namespace BusinessMobil.App.ViewModel
                 Settings.DNI = token.dni.Replace("{ Dni =", "").Replace(" ","").Replace("}","");
                 Settings.User = token.user;
                 Settings.Id = token.id;
+                Settings.Remember = true;
                 DependencyService.Get<ILodingPageService>().HideLoadingPage();
                 Application.Current.MainPage = new MasterPage();
                 

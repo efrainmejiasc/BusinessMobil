@@ -15,6 +15,12 @@ namespace BusinessMobil.App.Helpers
             set => Setting.AddOrUpdateValue(nameof(Token),value);
         }
 
+        public static bool Remember
+        {
+            get => Setting.GetValueOrDefault(nameof(Remember), false);
+            set => Setting.AddOrUpdateValue(nameof(Remember), value);
+        }
+
         public static string TypeToken
         {
             get => Setting.GetValueOrDefault(nameof(TypeToken), string.Empty);

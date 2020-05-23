@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessMobil.App.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessMobil.App.iOS", "BusinessMobil.App\BusinessMobil.App.iOS\BusinessMobil.App.iOS.csproj", "{760115B5-5614-4489-A912-FCC61ADCDD9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessMobil.App", "BusinessMobil.App\BusinessMobil.App\BusinessMobil.App.csproj", "{86CBEC77-6DA5-4743-94E9-9587AB2F9191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessMobil.App", "BusinessMobil.App\BusinessMobil.App\BusinessMobil.App.csproj", "{86CBEC77-6DA5-4743-94E9-9587AB2F9191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
