@@ -1,13 +1,16 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
-             x:Class="BusinessMobil.App.Views.Login">
-
+             x:Class="BusinessMobil.App.Views.CambiarContrasenaPage">
+    
     <ContentPage.BindingContext>
-        <viewModel:LoginViewModel/>
+        <viewModel:CambiarContrasenaViewModel/>
     </ContentPage.BindingContext>
-
+    
     <ContentPage.Content>
         <ScrollView>
             <Grid Style="{StaticResource MargenContentPage}">
@@ -29,17 +32,14 @@
                     <Entry Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
                 <StackLayout Grid.Row="3" Style="{StaticResource MargenControl}">
-                    <Label Text="Recuperar Contraseña" TextColor="#194973" FontSize="Small">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ActualizarCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                    <Label Text="Confirmar Contraseña"/>
+                    <Entry Text="{Binding PasswordConfirmacion}" IsPassword="True"/>
                 </StackLayout>
                 <StackLayout Grid.Row="4" Style="{StaticResource MargenButton}">
-                    <Button Text="Entrar" Command="{Binding EntrarCommand}"/>
+                    <Button Text="Actualizar" Command="{Binding ActualizarCommand}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="5" Style="{StaticResource MargenButton}">
-                    <Button Text="Registrarse" Command="{Binding RegistrarseCommand}"/>
+                    <Button Text="Cancelar" Command="{Binding CancelarCommand}"/>
                 </StackLayout>
             </Grid>
         </ScrollView>

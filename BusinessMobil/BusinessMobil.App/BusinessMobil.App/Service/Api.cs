@@ -345,5 +345,53 @@ namespace BusinessMobil.App.Service
                 };
             }
         }
+
+        public async Task<Response> PutRespondeAsync<T>(string parameter, T data)
+        {
+            try
+            {
+                var client = new HttpClient();
+                var url = $"{parameter}";
+                var json = JsonConvert.SerializeObject(data);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PutAsync($"{urlBase}/{url}", content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode.ToString() == "Unauthorized")
+                {
+                    DependencyService.Get<ILodingPageService>().HideLoadingPage();
+                    await App.Navigator.PushAsync(new Login());
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = result
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
     }
 }

@@ -20,8 +20,8 @@ namespace BusinessMobil.App.ViewModel
             api = new Api();
             EntrarCommand = new Command( async () => await Entrar());
             RegistrarseCommand = new Command(async () => await Navigation.PushAsync(new RegisterPage()));
-            //Email = "tuidentidad@hotmail.com";
-            //Password = "Tu.123456";
+            Email = "tuidentidad@hotmail.com";
+            Password = "Tu.123456";
         }
 
         string email;
@@ -48,6 +48,7 @@ namespace BusinessMobil.App.ViewModel
 
         public ICommand EntrarCommand { get; set; }
         public ICommand RegistrarseCommand { get; set; }
+        public ICommand ActualizarCommand => new Command(async () => await Navigation.PushAsync(new CambiarContrasenaPage()));
 
         async Task Entrar()
         {
