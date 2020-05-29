@@ -56,7 +56,7 @@ namespace BusinessMobil.App.ViewModel
                     Settings.User = string.Empty;
                     Settings.Id = string.Empty;
                     Settings.Remember = false;
-                    await Application.Current.MainPage.Navigation.PushAsync(new Login());
+                    Application.Current.MainPage = new NavigationPage(new Login());
                     break;
                 default:
                     break;

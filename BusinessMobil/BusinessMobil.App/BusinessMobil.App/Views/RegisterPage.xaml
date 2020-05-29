@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:BusinessMobil.App.ViewModel"
+             Title="Registrarse"
              x:Class="BusinessMobil.App.Views.RegisterPage">
     <ContentPage.BindingContext>
         <viewModel:ResgisterViewModel/>

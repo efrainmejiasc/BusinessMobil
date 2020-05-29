@@ -18,9 +18,9 @@ namespace BusinessMobil.App.ViewModel
 
         public CambiarContrasenaViewModel()
         {
-            Email = "tuidentidad@hotmail.com";
-            Password = "Tu.123456";
-            PasswordConfirmacion = Password;
+            //Email = "tuidentidad@hotmail.com";
+            //Password = "Tu.1111111";
+            //PasswordConfirmacion = Password;
         }
 
         public ICommand ActualizarCommand => new Command(async () => await Actualizar());
